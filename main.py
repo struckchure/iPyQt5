@@ -4,7 +4,7 @@ from PyQt5 import QtCore
 import sys
 
 from iBase.iBase import ButtonBase
-from iButtons.iButtons import Button, PushButton
+from iButtons.iButtons import Button
 
 
 
@@ -20,15 +20,6 @@ class Window(QtWidgets.QWidget):
         self.initialization()
     
     def initialization(self):
-        self.buttonTest = PushButton()
-        self.buttonTest.setText(self.tr("Click Here"))
-        self.buttonTest.setSizePolicy(
-            QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum
-        )
-        self.buttonTest.clicked.connect(self.fade)
-
-        # self.windowLayout.addWidget(self.buttonTest)
-
         self.windowLayout.addWidget(
             Button(
                 'primary',
@@ -46,28 +37,50 @@ class Window(QtWidgets.QWidget):
         self.windowLayout.addWidget(
             Button(
                 'success',
-                accent='success'
+                accent='success',
+                enabled=False,
+                onClick=self.fade
             )
         )
 
         self.windowLayout.addWidget(
             Button(
                 'info',
-                accent='info'
+                accent='info',
+                size='lg',
+                onClick=self.fade
             )
         )
 
         self.windowLayout.addWidget(
             Button(
                 'danger',
-                accent='danger'
+                accent='danger',
+                size='sm'
             )
         )
 
         self.windowLayout.addWidget(
             Button(
                 'warning',
-                accent='warning'
+                accent='warning',
+                size='xs'
+            )
+        )
+
+        self.windowLayout.addWidget(
+            Button(
+                'custom',
+                animation={
+                    'bgStartValue': 'green',
+                    'bgEndValue': 'red', # this will be used as background-color
+                    # 'duration': 400,
+                    'cStartValue': 'white',
+                   'cEndValue': 'white',
+                },
+                customVariables={
+                    'border-radius': '10px'
+                }
             )
         )
     

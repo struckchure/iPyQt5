@@ -22,8 +22,9 @@ QPushButton{
     border-style: $border-style;
     border-color: $border-color;
     border-radius: $border-radius;
-    max-width: $max-width;
-    max-height: $max-height;
+    min-width: $min-width;
+    min-height: $min-height;
+    line-height: $line-height;
 }
 
 /* QPushButton:pressed {
