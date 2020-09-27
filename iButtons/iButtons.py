@@ -43,7 +43,6 @@ class Button(QtWidgets.QPushButton, ButtonBase):
             }
         ):
         super(Button, self).__init__()
-        print(customVariables)
 
         self.accent = accent
         self.accentStyles = genericVariables.variables[self.accent]
@@ -53,18 +52,17 @@ class Button(QtWidgets.QPushButton, ButtonBase):
 
         self.customAnimations = iUtils.dictMerger(
             animation,
-            # {
-            #     # Background Color
+            {
+                # Background Color
 
-            #     'bgStartValue': self.accentStyles['hover']['background-color'],
-            #     'bgEndValue': self.accentStyles['normal']['background-color'],
-            #     'duration': 600,
+                'bgStartValue': self.accentStyles['hover']['background-color'],
+                'bgEndValue': self.accentStyles['normal']['background-color'],
                 
-            #     # Color
+                # Color
                 
-            #     'cStartValue': self.accentStyles['normal']['color'],
-            #     'cEndValue': self.accentStyles['hover']['color'],
-            # }
+                'cStartValue': self.accentStyles['normal']['color'],
+                'cEndValue': self.accentStyles['hover']['color'],
+            }
         )
         
         self._animation = QtCore.QVariantAnimation(
@@ -94,20 +92,11 @@ class Button(QtWidgets.QPushButton, ButtonBase):
         ):
         variables = iUtils.dictMerger(
             variables,
-            self.customVariables,
-            # self.accentStyles['normal']
+            self.customVariables
         )
 
-        # variables['background-color'] = self.accentStyles['normal']['background-color']
         variables['color'] = self.customAnimations['cStartValue']
         
-        print(
-            iUtils.dictMerger(
-                variables,
-                self.accentStyles['normal']
-            )
-        )
-
         self.currentVariables = variables
 
         self.customStyleSheet = iUtils.readQSS(
@@ -117,6 +106,7 @@ class Button(QtWidgets.QPushButton, ButtonBase):
         )
 
         self.setStyleSheet(self.customStyleSheet)
+        self._animation.start()
     
     def updateCustomStylesheet(self, backgroundColor, **kwargs):
         c1 = (

@@ -25,34 +25,51 @@ class Window(QtWidgets.QWidget):
         self.buttonTest.setSizePolicy(
             QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum
         )
+        self.buttonTest.clicked.connect(self.fade)
 
-        self.windowLayout.addWidget(self.buttonTest)
+        # self.windowLayout.addWidget(self.buttonTest)
 
-        self.buttonTest2 = Button('Click Here')
-        self.buttonTest2.clicked.connect(self.fade)
-
-        self.windowLayout.addWidget(self.buttonTest2)
-
-        self.buttonTest3 = Button(
-            'Click Here',
-            accent='success',
-            # customVariables={
-            #     'border-color': 'red',
-            #     'border-radius': '10px',
-            #     'font-size': '20px',
-            #     'max-width': '500px',
-            #     'max-height': '70px',
-            # },
-            # animation={
-            #     'bgStartValue': 'red',
-            #     'bgEndValue': 'white',
-            #     'duration': 1500,
-            #     'cStartValue': 'blue',
-            #     'cEndValue': 'white'
-            # }
+        self.windowLayout.addWidget(
+            Button(
+                'primary',
+                accent='primary'
+            )
         )
 
-        self.windowLayout.addWidget(self.buttonTest3)
+        self.windowLayout.addWidget(
+            Button(
+                'secondary',
+                accent='secondary'
+            )
+        )
+
+        self.windowLayout.addWidget(
+            Button(
+                'success',
+                accent='success'
+            )
+        )
+
+        self.windowLayout.addWidget(
+            Button(
+                'info',
+                accent='info'
+            )
+        )
+
+        self.windowLayout.addWidget(
+            Button(
+                'danger',
+                accent='danger'
+            )
+        )
+
+        self.windowLayout.addWidget(
+            Button(
+                'warning',
+                accent='warning'
+            )
+        )
     
     def fade(self):
         self.setWindowOpacity(0.5)
