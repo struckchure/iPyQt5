@@ -1,0 +1,55 @@
+/* Generic Card Configurations */
+
+* {
+    border-radius: 5px;
+}
+
+/* Generic Card Configurations */
+******************
+/* Card Basic */
+
+QGroupBox{
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: $background-color;
+    background-clip: border-box;
+    border-width: $border-width;
+    border-style: $border-style;
+    border-color: $border-color;
+    border-radius: $border-radius;
+}
+
+/* QPushButton:pressed {
+    border: 2px solid grey;
+}
+
+QPushButton:hover {
+    background-color: rgba(48, 128, 171, 0.845);
+} */
+
+/* Card Basic */
+******************
+/* Card Header */
+
+QGroupBox{
+
+}
+
+/* Card Header */
+******************
+/* Card Body */
+
+QGroupBox{
+
+}
+
+/* Card Body */
+******************
+/* Card Footer */
+
+QGroupBox{
+
+}
+
+/* Card Footer */
+******************

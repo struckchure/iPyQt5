@@ -1,15 +1,7 @@
-/* Generic Button Configurations */
 
-* {
-    border-radius: 5px;
-}
-
-/* Generic Button Configurations */
-
-/* Button Basic */
 
 QPushButton{
-    background-color: #ff0000;
+    background-color: white;
     border: none;
     color: white;
     padding: 0.7rem 1.2rem;
@@ -18,10 +10,10 @@ QPushButton{
     font-size: 1.5rem;
     font-family: Verdana;
     margin: 4px 2px;
-    border-width: 2px;
+    border-width: 1px;
     border-style: solid;
-    border-color: rgba(0, 0, 0, 0);
-    border-radius: 10px;
+    border-color: green;
+    border-radius: 5px;
     min-width: 100px;
     min-height: 30px;
     line-height: 1.5;
@@ -35,4 +27,3 @@ QPushButton:hover {
     background-color: rgba(48, 128, 171, 0.845);
 } */
 
-/* Button Basic */

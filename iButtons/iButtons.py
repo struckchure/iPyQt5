@@ -4,11 +4,6 @@ from PyQt5 import QtGui
 
 import os
 
-'''
-    Base for Genrics
-'''
-
-from iBase.iBase import ButtonBase
 from iUtils import iUtils
 from iQSS.iButton import iButtonVariables
 from iQSS import genericVariables
@@ -19,7 +14,7 @@ import configurations
 '''
 
 
-class Button(QtWidgets.QPushButton, ButtonBase):
+class Button(QtWidgets.QPushButton):
     def __init__(
             self,
             text:str='Click me',
@@ -85,13 +80,13 @@ class Button(QtWidgets.QPushButton, ButtonBase):
         width, height = iButtonVariables.sizes[size]['width'], iButtonVariables.sizes[size]['height']
 
         self.setText(text)
-        # self.setEnabled(enabled)
         
         if enabled:
             self.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         else:
             self.setCursor(QtGui.QCursor(QtCore.Qt.ForbiddenCursor))
-            
+            self.setWindowOpacity(0.45)
+
         self.setMaximumSize(
             width,
             height
@@ -125,7 +120,8 @@ class Button(QtWidgets.QPushButton, ButtonBase):
         self.customStyleSheet = iUtils.readQSS(
             qss=style,
             qssVariables=self.currentVariables,
-            output_file=output
+            output_file=output,
+            boundary='/* Button Basic */'
         )
 
         self.setStyleSheet(self.customStyleSheet)

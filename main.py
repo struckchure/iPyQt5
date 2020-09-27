@@ -3,9 +3,8 @@ from PyQt5 import QtGui
 from PyQt5 import QtCore
 import sys
 
-from iBase.iBase import ButtonBase
 from iButtons.iButtons import Button
-
+from iCards.iCards import Card
 
 
 class Window(QtWidgets.QWidget):
@@ -73,14 +72,23 @@ class Window(QtWidgets.QWidget):
                 'custom',
                 animation={
                     'bgStartValue': 'green',
-                    'bgEndValue': 'red', # this will be used as background-color
-                    # 'duration': 400,
+                    'bgEndValue': 'white', # this will be used as background-color
+                    'duration': 300,
                     'cStartValue': 'white',
-                   'cEndValue': 'white',
+                    'cEndValue': 'black',
                 },
                 customVariables={
-                    'border-radius': '10px'
+                    'border-radius': '5px',
+                    'border-width': '1px',
+                    'border-style': 'solid',
+                    'border-color': 'green',
                 }
+            )
+        )
+
+        self.windowLayout.addWidget(
+            Card(
+                
             )
         )
     
