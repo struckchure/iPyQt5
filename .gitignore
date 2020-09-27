@@ -5,3 +5,6 @@
 /iForms/__pycache__/
 /iQSS/__pycache__/
 /iUtils/__pycache__/
+/__pycache__/
+
+*.pyc
