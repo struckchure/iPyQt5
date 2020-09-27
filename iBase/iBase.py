@@ -4,6 +4,7 @@
 '''
 
 from iConfigurations import iConfig
+from iConfigurations import iButtonConfig
 
 
 '''
@@ -17,3 +18,5 @@ class ButtonBase:
     borderRadius = iConfig.generics['borderRadius']
     color = iConfig.generics['color']
     backgroundColor = iConfig.generics['backgroundColor']
+    width = iButtonConfig.generics['width']
+    height = iButtonConfig.generics['height']
