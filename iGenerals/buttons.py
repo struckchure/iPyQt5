@@ -30,7 +30,7 @@ class Button(QtWidgets.QPushButton):
 
         if accent:
             self.accent = accent
-            self.accentStyles = genericVariables.variables['iButtons']['accents'][self.accent]
+            self.accentStyles = genericVariables.variables['accents'][self.accent]
 
             animation = iUtils.dictMerger(
                 animation,
@@ -49,7 +49,7 @@ class Button(QtWidgets.QPushButton):
         
         self.customVariables = iUtils.dictMerger(
             customVariables,
-            genericVariables.variables['iButtons']['sizes'][size]
+            genericVariables.variables['sizes'][size]
         )
 
         self.customAnimations = iUtils.dictMerger(

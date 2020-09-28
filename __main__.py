@@ -3,18 +3,37 @@ from PyQt5 import QtGui
 from PyQt5 import QtCore
 import sys
 
-from iButtons.iButtons import Button
-from iCards.iCards import Card
+from iGenerals.buttons import Button
+from iGenerals.cards import Card
 
 
 class Window(QtWidgets.QWidget):
     def __init__(self):
         super(Window, self).__init__()
 
+        self.mainLayout = QtWidgets.QVBoxLayout()
+        self.mainLayout.setContentsMargins(0, 0, 0, 0)
+
         self.windowLayout = QtWidgets.QVBoxLayout()
         self.windowLayout.setAlignment(QtCore.Qt.AlignCenter)
 
-        self.setLayout(self.windowLayout)
+        self.mainGroup = QtWidgets.QGroupBox()
+        self.mainGroup.setStyleSheet(
+            '''
+                QGroupBox {
+                    border: 0;
+                }
+            '''
+        )
+        self.mainGroup.setLayout(self.windowLayout)
+
+        self.mainScroll = QtWidgets.QScrollArea()
+        self.mainScroll.setWidget(self.mainGroup)
+        self.mainScroll.setWidgetResizable(True)
+
+        self.mainLayout.addWidget(self.mainScroll)
+
+        self.setLayout(self.mainLayout)
 
         self.initialization()
     
@@ -88,7 +107,52 @@ class Window(QtWidgets.QWidget):
 
         self.windowLayout.addWidget(
             Card(
-                
+                accent='primary',
+                header={
+                    'accent': 'primary',
+                    'alignment': QtCore.Qt.AlignRight
+                },
+                footer={
+                    'accent': 'primary'
+                },
+                body={
+                    'alignment': QtCore.Qt.AlignCenter,
+                    'child': Button(
+                        'warning',
+                        accent='warning',
+                        size='xs'
+                    ),
+                }
+            )
+        )
+
+        self.windowLayout.addWidget(
+            Card(
+                accent='secondary'
+            )
+        )
+
+        self.windowLayout.addWidget(
+            Card(
+                accent='success'
+            )
+        )
+
+        self.windowLayout.addWidget(
+            Card(
+                accent='warning'
+            )
+        )
+
+        self.windowLayout.addWidget(
+            Card(
+                accent='info'
+            )
+        )
+
+        self.windowLayout.addWidget(
+            Card(
+                accent='danger'
             )
         )
     
@@ -100,7 +164,8 @@ class Window(QtWidgets.QWidget):
         self.setWindowOpacity(1)
 
 
-app = QtWidgets.QApplication(sys.argv)
-window = Window()
-window.show()
-sys.exit(app.exec_())
+if __name__ == '__main__':
+    app = QtWidgets.QApplication(sys.argv)
+    window = Window()
+    window.show()
+    sys.exit(app.exec_())

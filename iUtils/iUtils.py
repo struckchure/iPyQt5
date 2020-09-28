@@ -22,6 +22,7 @@ def dictMerger(*args):
 
 def readQSS(qss, qssVariables, output_file, boundary):
     qss = open(qss, mode='r').read().split(boundary)[1].split(boundary)[0]
+    
     qssVariables = dictMerger(GENERIC_VARIABLES, qssVariables)
     output_file = os.path.join(QSS_DIR, output_file)
 

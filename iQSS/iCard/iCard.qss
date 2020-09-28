@@ -10,29 +10,41 @@
 
 QGroupBox{
     min-width: 0;
-    word-wrap: break-word;
     background-color: $background-color;
     background-clip: border-box;
     border-width: $border-width;
     border-style: $border-style;
     border-color: $border-color;
     border-radius: $border-radius;
+    padding: 0;
 }
 
-/* QPushButton:pressed {
-    border: 2px solid grey;
+QGroupBox > QLabel {
+    color: white;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
 }
 
-QPushButton:hover {
-    background-color: rgba(48, 128, 171, 0.845);
-} */
+QGroupBox > QGroupBox:last-child QGroupBox:last-child {
+    border-bottom-right-radius: 0.25rem;
+    border-bottom-left-radius: 0.25rem;
+}
 
 /* Card Basic */
 ******************
 /* Card Header */
 
 QGroupBox{
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: $background-color;
+    border-bottom: 1px solid white;
+}
 
+QGroupBox > QLabel {
+    color: white;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
 }
 
 /* Card Header */
@@ -40,7 +52,7 @@ QGroupBox{
 /* Card Body */
 
 QGroupBox{
-
+    min-height: 100px;
 }
 
 /* Card Body */
@@ -48,7 +60,16 @@ QGroupBox{
 /* Card Footer */
 
 QGroupBox{
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: $background-color;
+    border-top: 1px solid white;
+}
 
+QGroupBox > QLabel {
+    color: white;
+    border-top-left-radius: 0.25rem;
+    border-top-right-radius: 0.25rem;
 }
 
 /* Card Footer */
