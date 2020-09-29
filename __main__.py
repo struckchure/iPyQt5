@@ -5,6 +5,9 @@ import sys
 
 from iGenerals.buttons import Button
 from iGenerals.cards import Card
+from iLayouts.layouts import NavBar
+from iGenerals.labels import Label
+from iQSS import genericVariables
 
 
 class Window(QtWidgets.QWidget):
@@ -13,6 +16,63 @@ class Window(QtWidgets.QWidget):
 
         self.mainLayout = QtWidgets.QVBoxLayout()
         self.mainLayout.setContentsMargins(0, 0, 0, 0)
+
+        self.accent = 'dark'
+        size = 'lg'
+        w, h = 100, 50
+        self.mainLayout.addWidget(
+            NavBar(
+                accent='dark',
+                child={
+                    'title': {
+                        'child': Label(
+                            text='NavBar',
+                            width=100,
+                            accent=self.accent
+                        ),
+                        'alignment': QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter
+                    },
+                    'body': {
+                        'children': [
+                            Button(
+                                'Home',
+                                accent=self.accent,
+                                size=size,
+                                width=w,
+                                height=h
+                            ),
+                            Button(
+                                'Gallery',
+                                accent=self.accent,
+                                size=size,
+                                width=w,
+                                height=h
+                            ),
+                            Button(
+                                'About',
+                                accent=self.accent,
+                                size=size,
+                                width=w,
+                                height=h
+                            ),
+                            Button(
+                                'Account',
+                                accent=self.accent,
+                                size=size,
+                                width=w,
+                                height=h,
+                                onClick=self.fade
+                            ),
+                        ],
+                        'alignment': QtCore.Qt.AlignRight
+                    },
+                    'end': {
+                        'children': [],
+                        'alignment': QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter
+                    },
+                },
+            )
+        )
 
         self.windowLayout = QtWidgets.QVBoxLayout()
         self.windowLayout.setAlignment(QtCore.Qt.AlignCenter)
@@ -28,6 +88,13 @@ class Window(QtWidgets.QWidget):
         self.mainGroup.setLayout(self.windowLayout)
 
         self.mainScroll = QtWidgets.QScrollArea()
+        self.mainScroll.setStyleSheet(
+            '''
+                QScrollArea {
+                    border: 0;
+                }
+            '''
+        )
         self.mainScroll.setWidget(self.mainGroup)
         self.mainScroll.setWidgetResizable(True)
 
@@ -38,123 +105,105 @@ class Window(QtWidgets.QWidget):
         self.initialization()
     
     def initialization(self):
-        self.windowLayout.addWidget(
-            Button(
-                'primary',
-                accent='primary'
-            )
-        )
+        self.buttonLayout = QtWidgets.QGridLayout()
+        self.windowLayout.addLayout(self.buttonLayout)
 
-        self.windowLayout.addWidget(
-            Button(
-                'secondary',
-                accent='secondary'
-            )
-        )
+        accents = genericVariables.variables['accents']
+        sizes = genericVariables.variables['sizes']
 
-        self.windowLayout.addWidget(
-            Button(
-                'success',
-                accent='success',
-                enabled=False,
-                onClick=self.fade
-            )
-        )
+        x, y = 0, 0
 
-        self.windowLayout.addWidget(
-            Button(
-                'info',
-                accent='info',
-                size='lg',
-                onClick=self.fade
+        for accent in accents:
+            size = 'xs'
+            self.buttonLayout.addWidget(
+                Button(
+                    f'{accent} {size}',
+                    accent=accent,
+                    size=size
+                ),
+                x,
+                y
             )
-        )
+            y += 1
+        x += 1
+        y = 0
 
-        self.windowLayout.addWidget(
-            Button(
-                'danger',
-                accent='danger',
-                size='sm'
+        for accent in accents:
+            size = 'sm'
+            self.buttonLayout.addWidget(
+                Button(
+                    f'{accent} {size}',
+                    accent=accent,
+                    size=size
+                ),
+                x,
+                y
             )
-        )
+            y += 1
+        x += 1
+        y = 0
 
-        self.windowLayout.addWidget(
-            Button(
-                'warning',
-                accent='warning',
-                size='xs'
+        for accent in accents:
+            size = 'lg'
+            self.buttonLayout.addWidget(
+                Button(
+                    f'{accent} {size}',
+                    accent=accent,
+                    size=size
+                ),
+                x,
+                y
             )
-        )
+            y += 1
+        x += 1
+        y = 0
 
-        self.windowLayout.addWidget(
-            Button(
-                'custom',
-                animation={
-                    'bgStartValue': 'green',
-                    'bgEndValue': 'white', # this will be used as background-color
-                    'duration': 300,
-                    'cStartValue': 'white',
-                    'cEndValue': 'black',
-                },
-                customVariables={
-                    'border-radius': '5px',
-                    'border-width': '1px',
-                    'border-style': 'solid',
-                    'border-color': 'green',
-                }
-            )
-        )
+        # self.windowLayout.addWidget(
+        #     Button(
+        #         'custom',
+        #         animation={
+        #             'bgStartValue': 'green',
+        #             'bgEndValue': 'white', # this will be used as background-color
+        #             'duration': 300,
+        #             'cStartValue': 'white',
+        #             'cEndValue': 'black',
+        #         },
+        #         customVariables={
+        #             'border-radius': '5px',
+        #             'border-width': '1px',
+        #             'border-style': 'solid',
+        #             'border-color': 'green',
+        #         }
+        #     )
+        # )
 
-        self.windowLayout.addWidget(
-            Card(
-                accent='primary',
-                header={
-                    'accent': 'primary',
-                    'alignment': QtCore.Qt.AlignRight
-                },
-                footer={
-                    'accent': 'primary'
-                },
-                body={
-                    'alignment': QtCore.Qt.AlignCenter,
-                    'child': Button(
-                        'warning',
-                        accent='warning',
-                        size='xs'
-                    ),
-                }
+        for accent in accents:
+            self.buttonLayout.addWidget(
+                Card(
+                    accent=accent,
+                    width=200,
+                    header={
+                        'accent': accent
+                    },
+                    footer={
+                        'accent': accent
+                    },
+                    body={
+                        'alignment': QtCore.Qt.AlignCenter,
+                        'child': Button(
+                            'warning',
+                            accent='warning',
+                            size='lg',
+                            # fill=True,
+                        )
+                    }
+                ),
+                x,
+                y
             )
-        )
-
-        self.windowLayout.addWidget(
-            Card(
-                accent='secondary'
-            )
-        )
-
-        self.windowLayout.addWidget(
-            Card(
-                accent='success'
-            )
-        )
-
-        self.windowLayout.addWidget(
-            Card(
-                accent='warning'
-            )
-        )
-
-        self.windowLayout.addWidget(
-            Card(
-                accent='info'
-            )
-        )
-
-        self.windowLayout.addWidget(
-            Card(
-                accent='danger'
-            )
-        )
+            y += 1
+        x += 1
+        y = 0
     
     def fade(self):
         self.setWindowOpacity(0.5)

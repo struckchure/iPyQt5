@@ -5,7 +5,7 @@ from PyQt5 import QtGui
 import os
 
 from iUtils import iUtils
-from iQSS.iButton import iButtonVariables
+from iQSS.iGeneral import iButtonVariables
 from iQSS import genericVariables
 import configurations
 
@@ -16,15 +16,18 @@ import configurations
 
 class Button(QtWidgets.QPushButton):
     def __init__(
-            self,
-            text:str='Click me',
-            icon:str=None,
-            onClick=None,
-            accent:str=None,
-            size:str='normal',
-            enabled:bool=True,
-            customVariables:dict={},
-            animation:dict={}
+        self,
+        text:str='Click me',
+        icon:str=None,
+        width:int=None,
+        height:int=None,
+        onClick=None,
+        accent:str=None,
+        size:str='normal',
+        fill:bool=False,
+        enabled:bool=True,
+        customVariables:dict={},
+        animation:dict={}
         ):
         super(Button, self).__init__()
 
@@ -47,11 +50,6 @@ class Button(QtWidgets.QPushButton):
                 },
             )
         
-        self.customVariables = iUtils.dictMerger(
-            customVariables,
-            genericVariables.variables['sizes'][size]
-        )
-
         self.customAnimations = iUtils.dictMerger(
             {
                 # Background Color
@@ -69,6 +67,7 @@ class Button(QtWidgets.QPushButton):
         )
         self.enabled = enabled
         self.onClick = onClick
+        self.fill = fill
         
         self._animation = QtCore.QVariantAnimation(
             startValue=QtGui.QColor(self.customAnimations['bgStartValue']),
@@ -77,24 +76,35 @@ class Button(QtWidgets.QPushButton):
             duration=self.customAnimations['duration'],
         )
 
-        width, height = iButtonVariables.sizes[size]['width'], iButtonVariables.sizes[size]['height']
+        if not width:
+            width = iButtonVariables.sizes[size]['width']
+        if not height:
+            height = iButtonVariables.sizes[size]['height']
 
         self.setText(text)
         
+        if not self.fill:
+            self.setMaximumSize(
+                width,
+                height
+            )
+            self.customVariables = iUtils.dictMerger(
+                customVariables,
+                genericVariables.variables['sizes'][size]
+            )
+        else:
+            self.customVariables = customVariables
+
+        self.setSizePolicy(
+            QtWidgets.QSizePolicy.Expanding,
+            QtWidgets.QSizePolicy.Expanding
+        )
+
         if enabled:
             self.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         else:
             self.setCursor(QtGui.QCursor(QtCore.Qt.ForbiddenCursor))
             self.setWindowOpacity(0.45)
-
-        self.setMaximumSize(
-            width,
-            height
-        )
-        self.setSizePolicy(
-            QtWidgets.QSizePolicy.Expanding,
-            QtWidgets.QSizePolicy.Expanding
-        )
         
         self.initialization()
 
@@ -104,9 +114,9 @@ class Button(QtWidgets.QPushButton):
 
     def setCustomStyleSheet(
         self,
-        style=os.path.join(configurations.QSS_DIR, 'iButton/iButton.qss'),
+        style=os.path.join(configurations.QSS_DIR, 'iGeneral/iButton.qss'),
         variables=iButtonVariables.variables,
-        output='iButton/iButton.css',
+        output='iGeneral/compiled/iButton.css',
         ):
         variables = iUtils.dictMerger(
             variables,

@@ -5,7 +5,7 @@ from PyQt5 import QtGui
 import os
 
 from iUtils import iUtils
-from iQSS.iCard import iCardVariables
+from iQSS.iGeneral import iCardVariables
 from iQSS import genericVariables
 import configurations
 
@@ -18,7 +18,8 @@ class Card(QtWidgets.QGroupBox):
     def __init__(
             self,
             accent:str='primary',
-            size:str='sm',
+            width:int=200,
+            height:int=200,
             header:dict={},
             body:dict={},
             footer:dict={},
@@ -27,7 +28,8 @@ class Card(QtWidgets.QGroupBox):
         super(Card, self).__init__()
 
         self.accent = accent
-        self.size = size
+        self.height = height
+        self.width = width
         self.header = iUtils.dictMerger(
             {
                 'accent': accent,
@@ -64,6 +66,7 @@ class Card(QtWidgets.QGroupBox):
             QtWidgets.QSizePolicy.Expanding,
             QtWidgets.QSizePolicy.Expanding
         )
+        self.setMaximumSize(self.width, self.height)
         self.setLayout(self.cardLayout)
 
         self.initialization()
@@ -76,9 +79,9 @@ class Card(QtWidgets.QGroupBox):
     
     def setCustomStyleSheet(
         self,
-        style=os.path.join(configurations.QSS_DIR, 'iCard/iCard.qss'),
+        style=os.path.join(configurations.QSS_DIR, 'iGeneral/iCard.qss'),
         variables=iCardVariables.variables,
-        output='iCard/iCard.css',
+        output='iGeneral/compiled/iCard.css',
         ):
         variables = iUtils.dictMerger(
             variables,
@@ -177,9 +180,9 @@ class CardHeader(QtWidgets.QGroupBox):
 
     def setCustomStyleSheet(
             self,
-            style=os.path.join(configurations.QSS_DIR, 'iCard/iCard.qss'),
+            style=os.path.join(configurations.QSS_DIR, 'iGeneral/iCard.qss'),
             variables=iCardVariables.variables,
-            output='iCard/iCard.css',
+            output='iGeneral/compiled/iCard.css',
         ):
         variables = iUtils.dictMerger(
             variables,
@@ -252,9 +255,9 @@ class CardBody(QtWidgets.QGroupBox):
 
     def setCustomStyleSheet(
         self,
-        style=os.path.join(configurations.QSS_DIR, 'iCard/iCard.qss'),
+        style=os.path.join(configurations.QSS_DIR, 'iGeneral/iCard.qss'),
         variables=iCardVariables.variables,
-        output='iCard/iCard.css',
+        output='iGeneral/compiled/iCard.css',
         ):
         variables = iUtils.dictMerger(
             variables,
@@ -327,9 +330,9 @@ class CardFooter(QtWidgets.QGroupBox):
 
     def setCustomStyleSheet(
         self,
-        style=os.path.join(configurations.QSS_DIR, 'iCard/iCard.qss'),
+        style=os.path.join(configurations.QSS_DIR, 'iGeneral/iCard.qss'),
         variables=iCardVariables.variables,
-        output='iCard/iCard.css',
+        output='iGeneral/compiled/iCard.css',
         ):
         variables = iUtils.dictMerger(
             variables,

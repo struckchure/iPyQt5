@@ -52,7 +52,7 @@ QGroupBox > QLabel {
 /* Card Body */
 
 QGroupBox{
-    min-height: 100px;
+    min-height: 50px;
 }
 
 /* Card Body */

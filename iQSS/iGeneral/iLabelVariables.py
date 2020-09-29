@@ -1,0 +1,15 @@
+variables = {
+    'background-color': '#ffffff',
+    'border-width': '0',
+    'border-style': 'solid',
+    'border-color': 'rgba(0, 0, 0, 0.125)',
+    'border-radius': '0.25rem',
+    'margin': '0',
+    'max-width': '200px',
+    'max-height': '50px',
+    'min-width': '50px',
+    'min-height': '40px',
+    'font-family': 'Verdana',
+    'padding': '0.5rem 0.5rem',
+    'text-align': 'center',
+}

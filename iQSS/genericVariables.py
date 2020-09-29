@@ -97,6 +97,16 @@ variables = {
                 'border-color': '#117a8b',
             }
         },
+        'dark': {
+            'normal': {
+                'background-color': '#343a40',
+                'color': '#ffffff'
+            },
+            'hover': {
+                'background-color': '#340a39',
+                'color': '#ffffff'
+            }
+        }
     },
     'sizes': {
         'normal': {

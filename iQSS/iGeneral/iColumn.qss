@@ -1,0 +1,16 @@
+/* Generic Column Configurations */
+
+* {
+    border-radius: 5px;
+}
+
+/* Generic Column Configurations */
+******************
+/* Column */
+
+QGroupBox{
+
+}
+
+/* Column */
+******************

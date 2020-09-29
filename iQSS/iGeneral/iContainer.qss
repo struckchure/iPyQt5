@@ -1,0 +1,16 @@
+/* Generic Container Configurations */
+
+* {
+    border-radius: 5px;
+}
+
+/* Generic Container Configurations */
+******************
+/* Container */
+
+QGroupBox{
+
+}
+
+/* Container */
+******************
