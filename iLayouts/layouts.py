@@ -22,7 +22,7 @@ class NavBar(QtWidgets.QGroupBox):
 		self,
         child:dict={},
         position:dict={},
-        height:int=45,
+        height:int=50,
         accent:str='primary',
         customVariables:dict={}
 		):
@@ -36,14 +36,15 @@ class NavBar(QtWidgets.QGroupBox):
 			customVariables
 		)
 		size = 'normal'
-		w, h = 100, 50
+		w, h = 100, height
 		self.child = iUtils.dictMerger(
 			{
 				'title': {
 					'child': Label(
 						text='iPyQt5',
-						width=100,
-						accent=self.accent
+						width=w,
+						height=h,
+						accent=self.accent,
 					),
 					'alignment': QtCore.Qt.AlignVCenter | QtCore.Qt.AlignLeft
 				},
@@ -87,14 +88,14 @@ class NavBar(QtWidgets.QGroupBox):
 		                    accent=self.accent,
 		                    size=size,
 		                    width=20,
-		                    height=20
+		                    height=h
 		                ),
 		                Button(
 		                    'S',
 		                    accent=self.accent,
 		                    size=size,
 		                    width=20,
-		                    height=20
+		                    height=h
 		                ),
 					],
 					'alignment': QtCore.Qt.AlignVCenter | QtCore.Qt.AlignRight
@@ -187,7 +188,7 @@ class NavBar(QtWidgets.QGroupBox):
 
 
 '''
-	Container
+	SideBar
 '''
 
 
@@ -299,3 +300,117 @@ class SideBar(QtWidgets.QGroupBox):
 				accent=self.accent
 			)
 		)
+
+
+'''
+	Page
+'''
+
+
+class Page(QtWidgets.QWidget):
+	def __init__(
+		self,
+		child:dict={},
+		customVariables:dict={}
+		):
+		super(Page, self).__init__()
+
+		self.customVariables = iUtils.dictMerger(
+			{
+				'margin': '0',
+				'padding': '0',
+				'border-width': '0'
+			},
+			customVariables
+		)
+		self.child = iUtils.dictMerger(
+			{
+				'sideBar': {
+					'child': SideBar(
+						accent='dark'
+					),
+					'alignment': QtCore.Qt.AlignTop
+				},
+				'navBar': {
+					'child': NavBar(
+						accent='dark'
+					),
+					'alignment': QtCore.Qt.AlignCenter
+				},
+				'body': {
+					'child': '',
+					'alignment': QtCore.Qt.AlignBottom
+				},
+				'footer': {
+					'child': '',
+					'alignment': QtCore.Qt.AlignBottom
+				}
+			},
+			child
+		)
+
+		self.pageLayout = QtWidgets.QHBoxLayout()
+		self.pageLayout.setContentsMargins(0, 0, 0, 0)
+		self.pageLayout.setSpacing(0)
+
+		self.leftPageLayout = QtWidgets.QVBoxLayout()
+		self.leftPageLayout.setContentsMargins(0, 0, 0, 0)
+		self.leftPageLayout.setSpacing(0)
+		self.pageLayout.addLayout(self.leftPageLayout)
+
+		self.rightPageLayout = QtWidgets.QVBoxLayout()
+		self.rightPageLayout.setAlignment(QtCore.Qt.AlignTop)
+		self.rightPageLayout.setContentsMargins(0, 0, 0, 0)
+		self.rightPageLayout.setSpacing(0)
+		self.pageLayout.addLayout(self.rightPageLayout)
+
+		self.setLayout(self.pageLayout)
+		self.setSizePolicy(
+			QtWidgets.QSizePolicy.Expanding,
+			QtWidgets.QSizePolicy.Expanding
+		)
+
+		self.initialization()
+
+	def initialization(self):
+		self.setCustomStyleSheet()
+		self.createSideBar()
+		self.createNavBar()
+		self.createBody()
+		self.createFooter()
+
+	def setCustomStyleSheet(
+		self,
+		style=os.path.join(configurations.QSS_DIR, 'iLayout/iLayout.qss'),
+		variables=iLayoutVariables.variables,
+		output='iLayout/compiled/iLayout.css',
+		):
+		variables = iUtils.dictMerger(
+		    variables,
+		    self.customVariables
+		)
+
+		self.currentVariables = variables
+
+		self.customStyleSheet = iUtils.readQSS(
+		    qss=style,
+		    qssVariables=self.currentVariables,
+		    output_file=output,
+		    boundary='/* Page */'
+		)
+
+	def createSideBar(self):
+		self.leftPageLayout.addWidget(
+			self.child['sideBar']['child']
+		)
+
+	def createNavBar(self):
+		self.rightPageLayout.addWidget(
+			self.child['navBar']['child']
+		)
+
+	def createBody(self):
+		pass
+
+	def createFooter(self):
+		pass

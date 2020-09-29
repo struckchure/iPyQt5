@@ -5,7 +5,7 @@ import sys
 
 from iGenerals.buttons import Button
 from iGenerals.cards import Card
-from iLayouts.layouts import NavBar, SideBar
+from iLayouts.layouts import NavBar, SideBar, Page
 from iGenerals.labels import Label
 from iQSS import genericVariables
 
@@ -222,6 +222,7 @@ class Window(QtWidgets.QWidget):
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
-    window = Window()
+    # window = Window()
+    window = Page()
     window.show()
     sys.exit(app.exec_())

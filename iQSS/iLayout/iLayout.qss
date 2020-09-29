@@ -36,3 +36,23 @@ QGroupBox{
 }
 
 /* SideBar */
+******************
+/* Page */
+
+QGroupBox{
+    background-color: $background-color;
+    border-radius: $border-radius;
+    padding: $padding;
+    margin: $margin;
+    min-width: $min-width;
+    max-width: $max-width;
+    min-width: 0;
+    min-height: 40px;
+    background-clip: border-box;
+    border: 0;
+    border-width: $border-width;
+    border-style: $border-style;
+    border-color: $border-color;
+}
+
+/* Page */

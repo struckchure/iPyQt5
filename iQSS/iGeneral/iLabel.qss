@@ -10,7 +10,7 @@
 
 QGroupBox{
     min-width: 0;
-    min-height: 40px;
+    min-height: $min-height;
     background-color: $background-color;
     background-clip: border-box;
     border-width: $border-width;

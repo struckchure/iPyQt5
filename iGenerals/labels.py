@@ -19,6 +19,7 @@ class Label(QtWidgets.QGroupBox):
 			self,
             text:str='Label',
             width=50,
+            height=45,
             child:dict={},
             position:dict={},
             accent:str='primary',
@@ -48,8 +49,10 @@ class Label(QtWidgets.QGroupBox):
 			alignment=QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop
 		)
 
+		height *= 1.5
+
 		self.setLayout(self.navBarLayout)
-		self.setMaximumWidth(width)
+		self.setMaximumSize(width, height)
 		self.setSizePolicy(
 			QtWidgets.QSizePolicy.Expanding,
 			QtWidgets.QSizePolicy.Expanding
