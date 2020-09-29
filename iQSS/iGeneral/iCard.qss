@@ -19,17 +19,6 @@ QGroupBox{
     padding: 0;
 }
 
-QGroupBox > QLabel {
-    color: white;
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
-}
-
-QGroupBox > QGroupBox:last-child QGroupBox:last-child {
-    border-bottom-right-radius: 0.25rem;
-    border-bottom-left-radius: 0.25rem;
-}
-
 /* Card Basic */
 ******************
 /* Card Header */
@@ -43,8 +32,6 @@ QGroupBox{
 
 QGroupBox > QLabel {
     color: white;
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
 }
 
 /* Card Header */
@@ -68,8 +55,6 @@ QGroupBox{
 
 QGroupBox > QLabel {
     color: white;
-    border-top-left-radius: 0.25rem;
-    border-top-right-radius: 0.25rem;
 }
 
 /* Card Footer */

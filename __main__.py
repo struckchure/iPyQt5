@@ -5,7 +5,7 @@ import sys
 
 from iGenerals.buttons import Button
 from iGenerals.cards import Card
-from iLayouts.layouts import NavBar
+from iLayouts.layouts import NavBar, SideBar
 from iGenerals.labels import Label
 from iQSS import genericVariables
 
@@ -14,65 +14,85 @@ class Window(QtWidgets.QWidget):
     def __init__(self):
         super(Window, self).__init__()
 
-        self.mainLayout = QtWidgets.QVBoxLayout()
+        self.mainLayout = QtWidgets.QHBoxLayout()
         self.mainLayout.setContentsMargins(0, 0, 0, 0)
 
         self.accent = 'dark'
-        size = 'lg'
-        w, h = 100, 50
-        self.mainLayout.addWidget(
-            NavBar(
+        accents = genericVariables.variables['accents']
+
+        x, y = 0, 0
+
+        self.leftLayout = QtWidgets.QVBoxLayout()
+        self.mainLayout.addLayout(self.leftLayout)
+
+        self.rightLayout = QtWidgets.QVBoxLayout()
+        self.mainLayout.addLayout(self.rightLayout)
+
+        self.leftLayout.addWidget(
+            SideBar(
                 accent='dark',
-                child={
-                    'title': {
-                        'child': Label(
-                            text='NavBar',
-                            width=100,
-                            accent=self.accent
-                        ),
-                        'alignment': QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter
-                    },
-                    'body': {
-                        'children': [
-                            Button(
-                                'Home',
-                                accent=self.accent,
-                                size=size,
-                                width=w,
-                                height=h
-                            ),
-                            Button(
-                                'Gallery',
-                                accent=self.accent,
-                                size=size,
-                                width=w,
-                                height=h
-                            ),
-                            Button(
-                                'About',
-                                accent=self.accent,
-                                size=size,
-                                width=w,
-                                height=h
-                            ),
-                            Button(
-                                'Account',
-                                accent=self.accent,
-                                size=size,
-                                width=w,
-                                height=h,
-                                onClick=self.fade
-                            ),
-                        ],
-                        'alignment': QtCore.Qt.AlignRight
-                    },
-                    'end': {
-                        'children': [],
-                        'alignment': QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter
-                    },
-                },
+                customVariables={
+                    # 'max-width': '80px'
+                }
             )
         )
+
+        for accent in accents:
+            w, h = 100, 50
+            size = 'lg'
+            self.rightLayout.addWidget(
+                NavBar(
+                    accent=accent,
+                    child={
+                        'title': {
+                            'child': Label(
+                                text='NavBar',
+                                width=100,
+                                accent=accent
+                            ),
+                            'alignment': QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter
+                        },
+                        'body': {
+                            'children': [
+                                Button(
+                                    'Home',
+                                    accent=accent,
+                                    size=size,
+                                    width=w,
+                                    height=h
+                                ),
+                                Button(
+                                    'Gallery',
+                                    accent=accent,
+                                    size=size,
+                                    width=w,
+                                    height=h
+                                ),
+                                Button(
+                                    'About',
+                                    accent=accent,
+                                    size=size,
+                                    width=w,
+                                    height=h
+                                ),
+                                Button(
+                                    'Account',
+                                    accent=accent,
+                                    size=size,
+                                    width=w,
+                                    height=h,
+                                    onClick=self.fade
+                                ),
+                            ],
+                            'alignment': QtCore.Qt.AlignRight
+                        },
+                        'end': {
+                            'children': [],
+                            'alignment': QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter
+                        },
+                    },
+                )
+            )
 
         self.windowLayout = QtWidgets.QVBoxLayout()
         self.windowLayout.setAlignment(QtCore.Qt.AlignCenter)
@@ -98,7 +118,7 @@ class Window(QtWidgets.QWidget):
         self.mainScroll.setWidget(self.mainGroup)
         self.mainScroll.setWidgetResizable(True)
 
-        self.mainLayout.addWidget(self.mainScroll)
+        self.rightLayout.addWidget(self.mainScroll)
 
         self.setLayout(self.mainLayout)
 
@@ -158,25 +178,6 @@ class Window(QtWidgets.QWidget):
         x += 1
         y = 0
 
-        # self.windowLayout.addWidget(
-        #     Button(
-        #         'custom',
-        #         animation={
-        #             'bgStartValue': 'green',
-        #             'bgEndValue': 'white', # this will be used as background-color
-        #             'duration': 300,
-        #             'cStartValue': 'white',
-        #             'cEndValue': 'black',
-        #         },
-        #         customVariables={
-        #             'border-radius': '5px',
-        #             'border-width': '1px',
-        #             'border-style': 'solid',
-        #             'border-color': 'green',
-        #         }
-        #     )
-        # )
-
         for accent in accents:
             self.buttonLayout.addWidget(
                 Card(
@@ -193,8 +194,7 @@ class Window(QtWidgets.QWidget):
                         'child': Button(
                             'warning',
                             accent='warning',
-                            size='lg',
-                            # fill=True,
+                            size='lg'
                         )
                     }
                 ),
@@ -211,6 +211,13 @@ class Window(QtWidgets.QWidget):
      
     def unfade(self):
         self.setWindowOpacity(1)
+
+    def resizeEvent(self, event):
+        self.resizeFunction()
+        super(Window, self).resizeEvent(event)
+
+    def resizeFunction(self):
+        print(self.width(), self.height())
 
 
 if __name__ == '__main__':

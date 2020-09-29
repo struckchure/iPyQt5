@@ -9,6 +9,7 @@ from iQSS.iLayout import iLayoutVariables
 from iQSS import genericVariables
 from iGenerals.labels import Label
 from iGenerals.buttons import Button
+from iGenerals.cards import CardHeader, CardFooter
 import configurations
 
 '''
@@ -18,12 +19,12 @@ import configurations
 
 class NavBar(QtWidgets.QGroupBox):
 	def __init__(
-			self,
-            child:dict={},
-            position:dict={},
-            height:int=45,
-            accent:str='primary',
-            customVariables:dict={}
+		self,
+        child:dict={},
+        position:dict={},
+        height:int=45,
+        accent:str='primary',
+        customVariables:dict={}
 		):
 		super(NavBar, self).__init__()
 
@@ -164,8 +165,6 @@ class NavBar(QtWidgets.QGroupBox):
 		title = self.child['title']
 		self.navTitleLayout.addWidget(
 			title['child'],
-			# stretch=0,
-			# alignment=title['alignment']
 		)
 
 	def createBody(self):
@@ -192,48 +191,111 @@ class NavBar(QtWidgets.QGroupBox):
 '''
 
 
-class Container(QtWidgets.QGroupBox):
+class SideBar(QtWidgets.QGroupBox):
 	def __init__(
-		self
+		self,
+        child:dict={},
+        position:dict={},
+        width:int=300,
+        accent:str='primary',
+        customVariables:dict={}
 		):
-		super(Container, self).__init__()
+		super(SideBar, self).__init__()
+
+		self.position = position
+		self.accent = accent
+		self.accentStyles = genericVariables.variables['accents'][self.accent]
+		self.customVariables = iUtils.dictMerger(
+			self.accentStyles['normal'],
+			customVariables
+		)
+		self.child = iUtils.dictMerger(
+			{
+				'title': {
+					'alignment': QtCore.Qt.AlignTop
+				},
+				'body': {
+					'alignment': QtCore.Qt.AlignCenter
+				},
+				'end': {
+					'alignment': QtCore.Qt.AlignBottom
+				}
+			},
+			child
+		)
+
+		self.sideBarLayout = QtWidgets.QVBoxLayout()
+		self.sideBarLayout.setAlignment(QtCore.Qt.AlignTop)
+		self.sideBarLayout.setContentsMargins(0, 0, 0, 0)
+
+		self.sideTitleLayout = QtWidgets.QVBoxLayout()
+		self.sideTitleLayout.setAlignment(self.child['title']['alignment'])
+		self.sideTitleLayout.setSpacing(0)
+		self.sideTitleLayout.setContentsMargins(0, 0, 0, 0)
+		self.sideBarLayout.addLayout(self.sideTitleLayout)
+
+		self.sideBodyLayout = QtWidgets.QVBoxLayout()
+		self.sideBodyLayout.setAlignment(self.child['body']['alignment'])
+		self.sideBodyLayout.setSpacing(0)
+		self.sideBodyLayout.setContentsMargins(0, 0, 0, 0)
+		self.sideBarLayout.addLayout(self.sideBodyLayout)
+
+		self.sideEndLayout = QtWidgets.QVBoxLayout()
+		self.sideEndLayout.setAlignment(self.child['end']['alignment'])
+		self.sideEndLayout.setSpacing(0)
+		self.sideEndLayout.setContentsMargins(0, 0, 0, 0)
+		self.sideBarLayout.addLayout(self.sideEndLayout)
+
+		self.setLayout(self.sideBarLayout)
+		self.setMaximumWidth(width)
+		self.setSizePolicy(
+			QtWidgets.QSizePolicy.Expanding,
+			QtWidgets.QSizePolicy.Expanding
+		)
 
 		self.initialization()
 
 	def initialization(self):
-		pass
+		self.setCustomStyleSheet()
+		self.createTitle()
+		self.createBody()
+		self.createEnd()
 
-
-
-'''
-	Row
-'''
-
-
-class Row(QtWidgets.QGroupBox):
-	def __init__(
-		self
+	def setCustomStyleSheet(
+		self,
+		style=os.path.join(configurations.QSS_DIR, 'iLayout/iLayout.qss'),
+		variables=iLayoutVariables.variables,
+		output='iLayout/compiled/iLayout.css',
 		):
-		super(Row, self).__init__()
+		variables = iUtils.dictMerger(
+		    variables,
+		    self.customVariables
+		)
 
-		self.initialization()
+		self.currentVariables = variables
 
-	def initialization(self):
+		self.customStyleSheet = iUtils.readQSS(
+		    qss=style,
+		    qssVariables=self.currentVariables,
+		    output_file=output,
+		    boundary='/* SideBar */'
+		)
+
+		self.setStyleSheet(self.customStyleSheet)
+
+	def createTitle(self):
+		self.sideTitleLayout.addWidget(
+			CardHeader(
+				accent=self.accent
+			)
+		)
+
+	def createBody(self):
 		pass
 
-
-'''
-	Column
-'''
-
-
-class Column(QtWidgets.QGroupBox):
-	def __init__(
-		self
-		):
-		super(Column, self).__init__()
-
-		self.initialization()
-
-	def initialization(self):
-		pass
+	def createEnd(self):
+		self.sideEndLayout.addWidget(
+			CardFooter(
+				accent=self.accent
+			)
+		)
