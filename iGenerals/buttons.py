@@ -1,6 +1,7 @@
 from PyQt5 import QtWidgets
 from PyQt5 import QtCore
 from PyQt5 import QtGui
+import qtawesome as qta
 
 import os
 
@@ -19,6 +20,9 @@ class Button(QtWidgets.QPushButton):
         self,
         text:str='Click me',
         icon:str=None,
+        iconColor:str='white',
+        iconScale:float=1.0,
+        iconSize:int=40,
         width:int=None,
         height:int=None,
         onClick=None,
@@ -68,6 +72,19 @@ class Button(QtWidgets.QPushButton):
         self.enabled = enabled
         self.onClick = onClick
         self.fill = fill
+        self.iconColor = iconColor
+        if icon:
+            self.icon = qta.icon(
+                icon,
+                color=self.iconColor,
+                options=[
+					{
+						'scale_factor': iconScale
+					}
+				]
+            )
+            self.setIcon(self.icon)
+            self.setIconSize(QtCore.QSize(iconSize, iconSize))
         
         self._animation = QtCore.QVariantAnimation(
             startValue=QtGui.QColor(self.customAnimations['bgStartValue']),
