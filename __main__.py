@@ -6,6 +6,7 @@ import sys
 from iGenerals.buttons import Button
 from iGenerals.cards import Card
 from iLayouts.layouts import NavBar, SideBar, Page
+from iLayouts.containers import Container
 from iGenerals.labels import Label
 from iQSS import genericVariables
 
@@ -223,6 +224,119 @@ class Window(QtWidgets.QWidget):
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     # window = Window()
-    window = Page()
+
+    buttonLayout = QtWidgets.QGridLayout()
+
+    accents = genericVariables.variables['accents']
+    sizes = genericVariables.variables['sizes']
+
+    x, y = 0, 0
+
+    for accent in accents:
+        size = 'xs'
+        buttonLayout.addWidget(
+            Button(
+                f'{accent} {size}',
+                accent=accent,
+                size=size
+            ),
+            x,
+            y
+        )
+        y += 1
+    x += 1
+    y = 0
+
+    for accent in accents:
+        size = 'sm'
+        buttonLayout.addWidget(
+            Button(
+                f'{accent} {size}',
+                accent=accent,
+                size=size
+            ),
+            x,
+            y
+        )
+        y += 1
+    x += 1
+    y = 0
+
+    for accent in accents:
+        size = 'lg'
+        buttonLayout.addWidget(
+            Button(
+                f'{accent} {size}',
+                accent=accent,
+                size=size
+            ),
+            x,
+            y
+        )
+        y += 1
+    x += 1
+    y = 0
+
+    for accent in accents:
+        buttonLayout.addWidget(
+            Card(
+                accent=accent,
+                width=200,
+                header={
+                    'accent': accent
+                },
+                footer={
+                    'accent': accent
+                },
+                body={
+                    'alignment': QtCore.Qt.AlignCenter,
+                    'child': Button(
+                        'warning',
+                        accent='warning',
+                        size='lg'
+                    )
+                }
+            ),
+            x,
+            y
+        )
+        y += 1
+    x += 1
+    y = 0
+
+    container = Container()
+    container.addLayout(buttonLayout)
+
+    windowLayout = QtWidgets.QVBoxLayout()
+    windowLayout.addWidget(container)
+    
+    mainGroup = QtWidgets.QGroupBox()
+    mainGroup.setStyleSheet(
+        '''
+            QGroupBox {
+                border: 0;
+            }
+        '''
+    )
+    mainGroup.setLayout(windowLayout)
+
+    mainScroll = QtWidgets.QScrollArea()
+    mainScroll.setStyleSheet(
+        '''
+            QScrollArea {
+                border: 0;
+            }
+        '''
+    )
+    mainScroll.setWidget(mainGroup)
+    mainScroll.setWidgetResizable(True)
+
+    window = Page(
+        child={
+            'body': {
+                'child': mainScroll
+            }
+        }
+    )
     window.show()
     sys.exit(app.exec_())

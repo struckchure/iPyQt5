@@ -1,0 +1,22 @@
+/* Generic Container Configurations */
+
+* {
+    border-radius: 5px;
+}
+
+/* Generic Container Configurations */
+******************
+/* Container */
+
+QGroupBox{
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    border-width: $border-width;
+    border-style: $border-style;
+    border-color: $border-color;
+}
+
+/* Container */

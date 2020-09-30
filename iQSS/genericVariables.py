@@ -128,6 +128,11 @@ variables = {
             'padding': '0.125rem 0.25rem',
             'font-size': '0.75rem',
             'line-height': '1.5',
-        }
+        },
+        'xss': {
+            'padding': '0.115rem 0.125rem',
+            'font-size': '0.5rem',
+            'line-height': '1.5',
+        },
     }
 }

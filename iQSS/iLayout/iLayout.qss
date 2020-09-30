@@ -1,10 +1,10 @@
-/* Generic Card Configurations */
+/* Generic Layout Configurations */
 
 * {
     border-radius: 5px;
 }
 
-/* Generic Card Configurations */
+/* Generic Layout Configurations */
 ******************
 /* NavBar */
 

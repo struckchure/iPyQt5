@@ -10,6 +10,7 @@ from iQSS import genericVariables
 from iGenerals.labels import Label
 from iGenerals.buttons import Button
 from iGenerals.cards import CardHeader, CardFooter
+from .containers import Container
 import configurations
 
 '''
@@ -198,12 +199,16 @@ class SideBar(QtWidgets.QGroupBox):
         child:dict={},
         position:dict={},
         width:int=300,
+        collapseWidth:int=70,
         accent:str='primary',
         customVariables:dict={}
 		):
 		super(SideBar, self).__init__()
 
 		self.position = position
+		self.width_ = width
+		self.sideBarMaxWidth = width
+		self.collapseWidth = collapseWidth
 		self.accent = accent
 		self.accentStyles = genericVariables.variables['accents'][self.accent]
 		self.customVariables = iUtils.dictMerger(
@@ -287,7 +292,20 @@ class SideBar(QtWidgets.QGroupBox):
 	def createTitle(self):
 		self.sideTitleLayout.addWidget(
 			CardHeader(
-				accent=self.accent
+				accent='dark',
+				child={
+					'child': Button(
+						text='|||',
+						accent='primary',
+						onClick=self.toggleMenu,
+						size='xss',
+						# width=40,
+						customVariables={
+							'text-align': 'left',
+							'padding': '10px'
+						}
+					)
+				}
 			)
 		)
 
@@ -300,6 +318,33 @@ class SideBar(QtWidgets.QGroupBox):
 				accent=self.accent
 			)
 		)
+
+	def toggleMenu(self):
+		maxWidth=self.sideBarMaxWidth - 100
+		enable = self.isEnabled()
+		collapseWidth = self.collapseWidth
+
+		if enable:
+			width = self.width()
+			maxExtend = maxWidth
+			standard = collapseWidth
+
+			if width == collapseWidth:
+				widthExtended = maxExtend
+			else:
+				widthExtended = standard
+
+			self.animation = QtCore.QPropertyAnimation(self, b"minimumWidth")
+			self.animation.setDuration(300)
+			self.animation.setStartValue(width)
+			self.animation.setEndValue(widthExtended)
+			self.animation.valueChanged.connect(self.updateSize)
+			self.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
+			self.animation.start()
+
+	def updateSize(self, value):
+		self.width_ = value
+		self.setMaximumWidth(value)
 
 
 '''
@@ -338,7 +383,11 @@ class Page(QtWidgets.QWidget):
 					'alignment': QtCore.Qt.AlignCenter
 				},
 				'body': {
-					'child': '',
+					'child': Container(
+						child={
+							'child': Button()
+						}
+					),
 					'alignment': QtCore.Qt.AlignBottom
 				},
 				'footer': {
@@ -410,7 +459,9 @@ class Page(QtWidgets.QWidget):
 		)
 
 	def createBody(self):
-		pass
+		self.rightPageLayout.addWidget(
+			self.child['body']['child']
+		)
 
 	def createFooter(self):
 		pass
