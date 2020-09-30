@@ -8,7 +8,7 @@
 ******************
 /* Label */
 
-QGroupBox{
+Label{
     min-width: 0;
     min-height: $min-height;
     background-color: $background-color;
@@ -21,7 +21,7 @@ QGroupBox{
     margin: 0
 }
 
-QGroupBox > QLabel {
+Label > QLabel {
     color: white;
     text-align: $text-align;
     margin: $margin

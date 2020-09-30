@@ -8,12 +8,12 @@
 ******************
 /* Container */
 
-QGroupBox{
+Container{
     width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
-    margin-right: auto;
-    margin-left: auto;
+    padding-right: $padding-right;
+    padding-left: $padding-left;
+    margin-right: $padding-right;
+    margin-left: $padding-left;
     border-width: $border-width;
     border-style: $border-style;
     border-color: $border-color;

@@ -1,6 +1,6 @@
 
 
-QPushButton{
+Button{
     background-color: #343a40;
     border: none;
     color: #ffffff;
@@ -19,11 +19,11 @@ QPushButton{
     line-height: 1.5;
 }
 
-/* QPushButton:pressed {
+/* Button:pressed {
     border: 2px solid grey;
 }
 
-QPushButton:hover {
+Button:hover {
     background-color: rgba(48, 128, 171, 0.845);
 } */
 

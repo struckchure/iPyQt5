@@ -1,6 +1,6 @@
 
 
-QGroupBox{
+Label{
     min-width: 0;
     min-height: 30px;
     background-color: #343a40;
@@ -13,7 +13,7 @@ QGroupBox{
     margin: 0
 }
 
-QGroupBox > QLabel {
+Label > QLabel {
     color: white;
     text-align: center;
     margin: 0

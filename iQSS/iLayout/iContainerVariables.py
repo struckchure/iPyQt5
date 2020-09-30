@@ -9,6 +9,8 @@ variables = {
     'min-width': '100px',
     'min-height': '50px',
     'font-family': 'Verdana',
-    'padding': '0',
-    'margin': '0'
+    'padding-left': '5px',
+    'padding-right': '5px',
+    'margin-left': 'auto',
+    'margin-right': 'auto'
 }

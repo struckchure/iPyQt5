@@ -9,7 +9,7 @@ from iQSS.iLayout import iLayoutVariables
 from iQSS import genericVariables
 from iGenerals.labels import Label
 from iGenerals.buttons import Button
-from iGenerals.cards import CardHeader, CardFooter
+from iGenerals.cards import CardHeader, CardBody, CardFooter
 from .containers import Container
 import configurations
 
@@ -221,7 +221,7 @@ class SideBar(QtWidgets.QGroupBox):
 					'alignment': QtCore.Qt.AlignTop
 				},
 				'body': {
-					'alignment': QtCore.Qt.AlignCenter
+					'alignment': QtCore.Qt.AlignTop | QtCore.Qt.AlignLeft
 				},
 				'end': {
 					'alignment': QtCore.Qt.AlignBottom
@@ -260,6 +260,7 @@ class SideBar(QtWidgets.QGroupBox):
 		)
 
 		self.initialization()
+		self.toggleMenu()
 
 	def initialization(self):
 		self.setCustomStyleSheet()
@@ -293,29 +294,39 @@ class SideBar(QtWidgets.QGroupBox):
 		self.sideTitleLayout.addWidget(
 			CardHeader(
 				accent='dark',
-				child={
-					'child': Button(
-						text='|||',
-						accent='primary',
-						onClick=self.toggleMenu,
-						size='xss',
-						# width=40,
-						customVariables={
-							'text-align': 'left',
-							'padding': '10px'
-						}
-					)
-				}
+				# child={
+				# 	'child': Button(
+				# 		text='|||',
+				# 		accent='primary',
+				# 		onClick=self.toggleMenu,
+				# 		size='xss',
+				# 		customVariables={
+				# 			'text-align': 'left',
+				# 			'padding': '10px'
+				# 		}
+				# 	)
+				# }
 			)
 		)
 
 	def createBody(self):
-		pass
+		self.sideBodyLayout.addWidget(
+			Button(
+				text='Home',
+				accent=self.accent,
+				size='lg',
+				customVariables={
+					'padding': '0px',
+					'margin': '0px',
+					'min-width': '0px'
+				}
+			)
+		)
 
 	def createEnd(self):
 		self.sideEndLayout.addWidget(
 			CardFooter(
-				accent=self.accent
+				accent=self.accent,
 			)
 		)
 
@@ -345,6 +356,14 @@ class SideBar(QtWidgets.QGroupBox):
 	def updateSize(self, value):
 		self.width_ = value
 		self.setMaximumWidth(value)
+
+	def enterEvent(self, event):
+		self.toggleMenu()
+		super().enterEvent(event)
+
+	def leaveEvent(self, event):
+		self.toggleMenu()
+		super().leaveEvent(event)
 
 
 '''

@@ -304,11 +304,9 @@ if __name__ == '__main__':
     x += 1
     y = 0
 
-    container = Container()
-    container.addLayout(buttonLayout)
 
     windowLayout = QtWidgets.QVBoxLayout()
-    windowLayout.addWidget(container)
+    windowLayout.addLayout(buttonLayout)
     
     mainGroup = QtWidgets.QGroupBox()
     mainGroup.setStyleSheet(
@@ -334,7 +332,17 @@ if __name__ == '__main__':
     window = Page(
         child={
             'body': {
-                'child': mainScroll
+                'child': Container(
+                    child={
+                        'child': mainScroll
+                    },
+                    customVariables={
+                        'padding-left': '0px',
+                        'padding-right': '0px',
+                        'margin-left': '0px',
+                        'margin-right': '0px',
+                    }
+                )
             }
         }
     )

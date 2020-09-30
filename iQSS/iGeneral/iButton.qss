@@ -8,7 +8,7 @@
 
 /* Button Basic */
 
-QPushButton{
+Button{
     background-color: $background-color;
     border: none;
     color: $color;
@@ -27,11 +27,11 @@ QPushButton{
     line-height: $line-height;
 }
 
-/* QPushButton:pressed {
+/* Button:pressed {
     border: 2px solid grey;
 }
 
-QPushButton:hover {
+Button:hover {
     background-color: rgba(48, 128, 171, 0.845);
 } */
 
