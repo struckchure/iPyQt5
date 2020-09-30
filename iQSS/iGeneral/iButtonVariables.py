@@ -38,7 +38,7 @@ sizes = {
         'height': 30
     },
     'xss' : {
-        'width': 50,
+        'width': 120,
         'height': 30
     }
 }

@@ -223,7 +223,6 @@ class Window(QtWidgets.QWidget):
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
-    # window = Window()
 
     buttonLayout = QtWidgets.QGridLayout()
 
@@ -231,6 +230,21 @@ if __name__ == '__main__':
     sizes = genericVariables.variables['sizes']
 
     x, y = 0, 0
+
+    for accent in accents:
+        size = 'xss'
+        buttonLayout.addWidget(
+            Button(
+                f'{accent} {size}',
+                accent=accent,
+                size=size
+            ),
+            x,
+            y
+        )
+        y += 1
+    x += 1
+    y = 0
 
     for accent in accents:
         size = 'xs'

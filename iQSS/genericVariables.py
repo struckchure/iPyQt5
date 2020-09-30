@@ -130,7 +130,7 @@ variables = {
             'line-height': '1.5',
         },
         'xss': {
-            'padding': '0.115rem 0.125rem',
+            'padding': '0.15rem 0.2rem',
             'font-size': '0.5rem',
             'line-height': '1.5',
         },
