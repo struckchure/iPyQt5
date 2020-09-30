@@ -25,7 +25,10 @@ class NavBar(QtWidgets.QGroupBox):
         position:dict={},
         height:int=50,
         accent:str='primary',
-        customVariables:dict={}
+        customVariables:dict={},
+		shadowWidth:int=30,
+		xIndex:float=0,
+		yIndex:float=0
 		):
 		super(NavBar, self).__init__()
 
@@ -126,6 +129,14 @@ class NavBar(QtWidgets.QGroupBox):
 		self.navEndLayout.setContentsMargins(0, 0, 0, 0)
 		self.navBarLayout.addLayout(self.navEndLayout)
 
+		self.graphicsEffect = QtWidgets.QGraphicsDropShadowEffect()
+		self.graphicsEffect.setBlurRadius(shadowWidth)
+		self.graphicsEffect.setXOffset(xIndex)
+		self.graphicsEffect.setYOffset(yIndex)
+		self.graphicsEffect.setColor(QtGui.QColor(0, 0, 0, 150))
+
+		# self.setGraphicsEffect(self.graphicsEffect)
+
 		self.setLayout(self.navBarLayout)
 		self.setMaximumHeight(height)
 		self.setSizePolicy(
@@ -199,9 +210,12 @@ class SideBar(QtWidgets.QGroupBox):
         child:dict={},
         position:dict={},
         width:int=300,
-        collapseWidth:int=70,
+        collapseWidth:int=40,
         accent:str='primary',
-        customVariables:dict={}
+        customVariables:dict={},
+		shadowWidth:int=30,
+		xIndex:float=0.0,
+		yIndex:float=0.0
 		):
 		super(SideBar, self).__init__()
 
@@ -252,6 +266,13 @@ class SideBar(QtWidgets.QGroupBox):
 		self.sideEndLayout.setContentsMargins(0, 0, 0, 0)
 		self.sideBarLayout.addLayout(self.sideEndLayout)
 
+		self.graphicsEffect = QtWidgets.QGraphicsDropShadowEffect()
+		self.graphicsEffect.setBlurRadius(shadowWidth)
+		self.graphicsEffect.setXOffset(xIndex)
+		self.graphicsEffect.setYOffset(yIndex)
+		self.graphicsEffect.setColor(QtGui.QColor(0, 0, 0, 150))
+
+		self.setGraphicsEffect(self.graphicsEffect)
 		self.setLayout(self.sideBarLayout)
 		self.setMaximumWidth(width)
 		self.setSizePolicy(
@@ -308,17 +329,64 @@ class SideBar(QtWidgets.QGroupBox):
 				# }
 			)
 		)
-
+		
 	def createBody(self):
 		self.sideBodyLayout.addWidget(
 			Button(
-				text='Home',
+				text='Dashboard',
+				icon='fa.tachometer',
 				accent=self.accent,
 				size='lg',
 				customVariables={
-					'padding': '0px',
+					'padding': '10px 10px',
 					'margin': '0px',
-					'min-width': '0px'
+					'min-width': '0px',
+					'text-align': 'left'
+				}
+			)
+		)
+
+		self.sideBodyLayout.addWidget(
+			Button(
+				text='Profile',
+				icon='fa.user',
+				accent=self.accent,
+				size='lg',
+				customVariables={
+					'padding': '10px 10px',
+					'margin': '0px',
+					'min-width': '0px',
+					'text-align': 'left'
+				}
+			)
+		)
+
+		self.sideBodyLayout.addWidget(
+			Button(
+				text='Settings',
+				icon='fa.cog',
+				accent=self.accent,
+				size='lg',
+				customVariables={
+					'padding': '10px 10px',
+					'margin': '0px',
+					'min-width': '0px',
+					'text-align': 'left'
+				}
+			)
+		)
+
+		self.sideBodyLayout.addWidget(
+			Button(
+				text='Exit',
+				icon='mdi.exit-to-app',
+				accent=self.accent,
+				size='lg',
+				customVariables={
+					'padding': '10px 10px',
+					'margin': '0px',
+					'min-width': '0px',
+					'text-align': 'left'
 				}
 			)
 		)
@@ -404,7 +472,10 @@ class Page(QtWidgets.QWidget):
 				'body': {
 					'child': Container(
 						child={
-							'child': Button()
+							'child': Button(
+								text='Dashboard',
+								icon='fa.tachometer'
+							)
 						}
 					),
 					'alignment': QtCore.Qt.AlignBottom

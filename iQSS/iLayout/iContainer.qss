@@ -17,6 +17,7 @@ Container{
     border-width: $border-width;
     border-style: $border-style;
     border-color: $border-color;
+    background-color: $background-color;
 }
 
 /* Container */

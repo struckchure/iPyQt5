@@ -327,6 +327,7 @@ if __name__ == '__main__':
         '''
             QGroupBox {
                 border: 0;
+                background-color: rgba(0, 0, 0, 0)
             }
         '''
     )
@@ -337,6 +338,7 @@ if __name__ == '__main__':
         '''
             QScrollArea {
                 border: 0;
+                background-color: rgba(0, 0, 0, 0)
             }
         '''
     )
