@@ -20,7 +20,6 @@ class TextInput(QtWidgets.QGroupBox):
 		self,
 		width:int=200,
 		height:int=60,
-		accent:str='primary',
 		child:dict={},
 		customVariables:dict={},
 		placeHolderText:str=None,
@@ -30,7 +29,6 @@ class TextInput(QtWidgets.QGroupBox):
 
 		self.height = height
 		self.width = width
-		self.accent = accent
 		self.child = iUtils.dictMerger(
 			{
 				'icon': {
@@ -50,10 +48,8 @@ class TextInput(QtWidgets.QGroupBox):
 		self.placeHolderText = placeHolderText
 		self.password = password
 
-		self.accentStyles = genericVariables.variables['accents'][self.accent]
 		self.customVariables = iUtils.dictMerger(
-		    self.accentStyles['normal'],
-		    self.customVariables,
+		    self.customVariables
 		)
 
 		self.inputLayout = QtWidgets.QBoxLayout(self.child['direction'])
@@ -160,3 +156,130 @@ class TextInput(QtWidgets.QGroupBox):
 '''
     FileInput
 '''
+
+
+'''
+	Form
+'''
+
+class Form(QtWidgets.QGroupBox):
+	def __init__(
+		self,
+		grid:bool=False,
+		width:int=400,
+		height:int=600,
+		children:dict={},
+		customVariables:dict={},
+		onSubmit=None
+		):
+		super(Form, self).__init__()
+
+		self.grid = grid
+		self.customVariables = iUtils.dictMerger(
+			{
+				'border-width': '0',
+				'padding': '20px'
+			},
+		    customVariables
+		)
+		self.children = iUtils.dictMerger(
+			{
+				'children': [
+					TextInput(
+					    child={
+					        'icon': {
+					            'icon': 'fa.user',
+					            'color': 'black',
+					            'scale': 0.9
+					        },
+					        'label': {
+					            'text': 'Username',
+					            'font-size': '12px'
+					        },
+					        'direction': QtWidgets.QBoxLayout.TopToBottom
+					    },
+					    width=300,
+					    placeHolderText='John',
+					    customVariables={
+					        'font-size': '12px',
+					        'border-color': 'grey',
+					        'border-radius': '6px',
+					    },
+					),
+					TextInput(
+					    child={
+					        'icon': {
+					            'icon': 'fa.key',
+					            'color': 'black',
+					            'scale': 0.9
+					        },
+					        'label': {
+					            'text': 'Password',
+					            'font-size': '12px'
+					        },
+					        'direction': QtWidgets.QBoxLayout.TopToBottom
+					    },
+					    password=True,
+					    width=300,
+					    placeHolderText='keep it secret',
+					    customVariables={
+					        'font-size': '12px',
+					        'border-color': 'grey',
+					        'border-radius': '6px',
+					    },
+					)
+				],
+				'spacing': 0,
+				'alignment': QtCore.Qt.AlignCenter
+			},
+			children
+		)
+		self.onSubmit = onSubmit
+
+		if grid:
+			self.formLayout = QtWidgets.QGridLayout()
+		else:
+			self.formLayout = QtWidgets.QVBoxLayout()
+
+		self.formLayout.setContentsMargins(0, 0, 0, 0)
+		self.formLayout.setSpacing(self.children['spacing'])
+		self.formLayout.setAlignment(self.children['alignment'])
+
+		self.setLayout(self.formLayout)
+		self.setMaximumSize(width, height)
+		self.setSizePolicy(
+			QtWidgets.QSizePolicy.Expanding,
+			QtWidgets.QSizePolicy.Expanding
+		)
+
+		self.initialization()
+
+	def initialization(self):
+		self.setCustomStyleSheet()
+		self.createForm(self.children['children'])
+
+	def setCustomStyleSheet(
+		self,
+		style=os.path.join(configurations.QSS_DIR, 'iGeneral/iForm.qss'),
+		variables=iFormVariables.variables,
+		output='iGeneral/compiled/iForm.css',
+		):
+		variables = iUtils.dictMerger(
+		    variables,
+		    self.customVariables
+		)
+
+		self.currentVariables = variables
+
+		self.customStyleSheet = iUtils.readQSS(
+		    qss=style,
+		    qssVariables=self.currentVariables,
+		    output_file=output,
+		    boundary='/* Form */'
+		)
+
+		self.setStyleSheet(self.customStyleSheet)
+
+	def createForm(self, children):
+		for child in children:
+			self.formLayout.addWidget(child)

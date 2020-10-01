@@ -1,4 +1,4 @@
-/* Generic TextInput Configurations */
+/* Generic Form Configurations */
 
 * {
     border-radius: 5px;
@@ -42,4 +42,16 @@ QLineEdit:focus {
 }
 
 /* TextInput */
+******************
+/* Form */
+
+Form {
+	border-width: $border-width;
+	border-style: $border-style;
+	border-color: $border-color;
+	background-color: $background-color;
+	padding: $padding;
+}
+
+/* Form */
 ******************

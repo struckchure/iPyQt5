@@ -7,7 +7,7 @@ import qtawesome as qta
 from iGenerals.buttons import Button
 from iGenerals.cards import Card
 from iLayouts.layouts import NavBar, SideBar, Page
-from iGenerals.forms import TextInput
+from iGenerals.forms import TextInput, Form
 from iLayouts.containers import Container, Scroll
 from iGenerals.labels import Label
 from iQSS import genericVariables
@@ -399,6 +399,15 @@ if __name__ == '__main__':
             },
         )
     )
+
+    windowLayout.addWidget(
+        Form(
+            customVariables={
+                'background-color': 'rgba(0, 0, 0, 0.2)'
+            },
+            height=900
+        )
+    )
     
     mainGroup = QtWidgets.QGroupBox()
     mainGroup.setStyleSheet(
@@ -429,7 +438,6 @@ if __name__ == '__main__':
         color='blue',
         color_active='orange'
     )
-    # test.setWindowIcon(testIcon)
 
     window = Page(
         child={
@@ -450,7 +458,6 @@ if __name__ == '__main__':
                             )
                         }
                     ),
-                    # testIcon,
                 ]
             }
         }
@@ -458,6 +465,4 @@ if __name__ == '__main__':
 
     window.show()
 
-    # window1 = Window()
-    # window1.show()
     sys.exit(app.exec_())
