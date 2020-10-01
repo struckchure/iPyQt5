@@ -2,10 +2,12 @@ from PyQt5 import QtWidgets
 from PyQt5 import QtGui
 from PyQt5 import QtCore
 import sys
+import qtawesome as qta
 
 from iGenerals.buttons import Button
 from iGenerals.cards import Card
 from iLayouts.layouts import NavBar, SideBar, Page
+from iGenerals.forms import TextInput
 from iLayouts.containers import Container, Scroll
 from iGenerals.labels import Label
 from iQSS import genericVariables
@@ -349,6 +351,55 @@ if __name__ == '__main__':
     windowLayout = QtWidgets.QVBoxLayout()
     windowLayout.addLayout(buttonLayout)
     
+    windowLayout.addWidget(
+        TextInput(
+            child={
+                'icon': {
+                    'icon': 'fa.user',
+                    'color': 'black',
+                    'scale': 0.9
+                },
+                'label': {
+                    'text': 'Username',
+                    'font-size': '12px'
+                },
+                'direction': QtWidgets.QBoxLayout.TopToBottom
+            },
+            width=300,
+            placeHolderText='John',
+            customVariables={
+                'font-size': '12px',
+                'border-color': 'grey',
+                'border-radius': '6px',
+            },
+        )
+    )
+
+    windowLayout.addWidget(
+        TextInput(
+            child={
+                'icon': {
+                    'icon': 'fa.key',
+                    'color': 'black',
+                    'scale': 0.9
+                },
+                'label': {
+                    'text': 'Password',
+                    'font-size': '12px'
+                },
+                'direction': QtWidgets.QBoxLayout.TopToBottom
+            },
+            password=True,
+            width=300,
+            placeHolderText='keep it secret',
+            customVariables={
+                'font-size': '12px',
+                'border-color': 'grey',
+                'border-radius': '6px',
+            },
+        )
+    )
+    
     mainGroup = QtWidgets.QGroupBox()
     mainGroup.setStyleSheet(
         '''
@@ -372,6 +423,14 @@ if __name__ == '__main__':
     mainScroll.setWidget(mainGroup)
     mainScroll.setWidgetResizable(True)
 
+    test = QtWidgets.QLabel('text')
+    testIcon = qta.IconWidget(
+        'fa5s.music',
+        color='blue',
+        color_active='orange'
+    )
+    # test.setWindowIcon(testIcon)
+
     window = Page(
         child={
             'body': {
@@ -391,10 +450,12 @@ if __name__ == '__main__':
                             )
                         }
                     ),
+                    # testIcon,
                 ]
             }
         }
     )
+
     window.show()
 
     # window1 = Window()
