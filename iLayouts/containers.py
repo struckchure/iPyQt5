@@ -30,7 +30,7 @@ class Container(QtWidgets.QGroupBox):
 		)
 		self.child = iUtils.dictMerger(
 			{
-				'child': Button()
+				'child': QtWidgets.QVBoxLayout()
 			},
 			child
 		)
@@ -41,7 +41,6 @@ class Container(QtWidgets.QGroupBox):
 			QtWidgets.QSizePolicy.Expanding,
 			QtWidgets.QSizePolicy.Expanding
 		)
-		self.setLayout(self.containerLayout)
 
 		self.initialization()
 
@@ -73,11 +72,72 @@ class Container(QtWidgets.QGroupBox):
 
 	def addChildWidget(self, child):
 		if child:
-			self.containerLayout.addWidget(child)
+			self.setLayout(child)
 
 	def addLayout(self, child):
 		if child:
 			self.containerLayout.addLayout(child)
+
+
+'''
+	Scroll
+'''
+
+class Scroll(QtWidgets.QScrollArea):
+	def __init__(
+		self,
+        child:dict={},
+        customVariables:dict={}
+		):
+		super(Scroll, self).__init__()
+
+		self.customVariables = iUtils.dictMerger(
+			customVariables
+		)
+		self.child = iUtils.dictMerger(
+			{
+				'child': Button()
+			},
+			child
+		)
+
+		self.setSizePolicy(
+			QtWidgets.QSizePolicy.Expanding,
+			QtWidgets.QSizePolicy.Expanding
+		)
+		self.setWidgetResizable(True)
+
+		self.initialization()
+
+	def initialization(self):
+		self.setCustomStyleSheet()
+		self.addChildWidget(self.child['child'])
+
+	def setCustomStyleSheet(
+		self,
+		style=os.path.join(configurations.QSS_DIR, 'iLayout/iContainer.qss'),
+		variables=iLayoutVariables.variables,
+		output='iLayout/compiled/iContainer.css',
+		):
+		variables = iUtils.dictMerger(
+		    variables,
+		    self.customVariables
+		)
+
+		self.currentVariables = variables
+
+		self.customStyleSheet = iUtils.readQSS(
+		    qss=style,
+		    qssVariables=self.currentVariables,
+		    output_file=output,
+		    boundary='/* Scroll */'
+		)
+
+		self.setStyleSheet(self.customStyleSheet)
+
+	def addChildWidget(self, child):
+		if child:
+			self.setWidget(child)
 
 
 '''

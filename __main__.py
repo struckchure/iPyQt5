@@ -6,7 +6,7 @@ import sys
 from iGenerals.buttons import Button
 from iGenerals.cards import Card
 from iLayouts.layouts import NavBar, SideBar, Page
-from iLayouts.containers import Container
+from iLayouts.containers import Container, Scroll
 from iGenerals.labels import Label
 from iQSS import genericVariables
 
@@ -348,19 +348,28 @@ if __name__ == '__main__':
     window = Page(
         child={
             'body': {
-                'child': Container(
-                    child={
-                        'child': mainScroll
-                    },
-                    customVariables={
-                        'padding-left': '0px',
-                        'padding-right': '0px',
-                        'margin-left': '0px',
-                        'margin-right': '0px',
-                    }
-                )
+                'children': [
+                    Scroll(
+                        child={
+                            'child': Container(
+                                child={
+                                    'child': windowLayout
+                                },
+                                customVariables={
+                                    'padding-left': '0px',
+                                    'padding-right': '0px',
+                                    'margin-left': '0px',
+                                    'margin-right': '0px',
+                                }
+                            )
+                        }
+                    ),
+                ]
             }
         }
     )
     window.show()
+    
+    # window1 = Window()
+    # window1.show()
     sys.exit(app.exec_())

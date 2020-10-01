@@ -195,7 +195,7 @@ class CardHeader(QtWidgets.QGroupBox):
             qss=style,
             qssVariables=self.currentVariables,
             output_file=output,
-            boundary='/* Card Header */'
+            boundary='/* Card Basic */'
         )
 
         self.setStyleSheet(self.customStyleSheet)
@@ -270,7 +270,7 @@ class CardBody(QtWidgets.QGroupBox):
             qss=style,
             qssVariables=self.currentVariables,
             output_file=output,
-            boundary='/* Card Body */'
+            boundary='/* Card Basic */'
         )
 
         self.setStyleSheet(self.customStyleSheet)
@@ -345,7 +345,7 @@ class CardFooter(QtWidgets.QGroupBox):
             qss=style,
             qssVariables=self.currentVariables,
             output_file=output,
-            boundary='/* Card Footer */'
+            boundary='/* Card Basic */'
         )
 
         self.setStyleSheet(self.customStyleSheet)

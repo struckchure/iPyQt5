@@ -8,7 +8,7 @@
 ******************
 /* NavBar */
 
-QGroupBox{
+NavBar{
     min-width: 0;
     min-height: 40px;
     background-color: $background-color;
@@ -25,7 +25,7 @@ QGroupBox{
 ******************
 /* SideBar */
 
-QGroupBox{
+SideBar{
     background-color: $background-color;
     height: calc(100vh - (3.5rem + 1px));
     border-radius: $border-radius;
@@ -39,7 +39,7 @@ QGroupBox{
 ******************
 /* Page */
 
-QGroupBox{
+Page{
     background-color: $background-color;
     border-radius: $border-radius;
     padding: $padding;

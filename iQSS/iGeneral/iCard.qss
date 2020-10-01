@@ -19,32 +19,23 @@ Card{
     padding: 0;
 }
 
-/* Card Basic */
-******************
-/* Card Header */
-
 CardHeader{
     padding: 0.75rem 1.25rem;
     margin-bottom: 0;
     background-color: $background-color;
+    border: 0;
     border-bottom: 1px solid white;
 }
 
 CardHeader > QLabel {
     color: white;
+    border: 0;
 }
-
-/* Card Header */
-******************
-/* Card Body */
 
 CardBody{
     min-height: 50px;
+    border: 0px;
 }
-
-/* Card Body */
-******************
-/* Card Footer */
 
 CardFooter{
     padding: 0.75rem 1.25rem;
@@ -57,5 +48,4 @@ CardFooter > QLabel {
     color: white;
 }
 
-/* Card Footer */
-******************
+/* Card Basic */

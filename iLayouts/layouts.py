@@ -135,7 +135,7 @@ class NavBar(QtWidgets.QGroupBox):
 		self.graphicsEffect.setYOffset(yIndex)
 		self.graphicsEffect.setColor(QtGui.QColor(0, 0, 0, 150))
 
-		# self.setGraphicsEffect(self.graphicsEffect)
+		self.setGraphicsEffect(self.graphicsEffect)
 
 		self.setLayout(self.navBarLayout)
 		self.setMaximumHeight(height)
@@ -213,9 +213,9 @@ class SideBar(QtWidgets.QGroupBox):
         collapseWidth:int=40,
         accent:str='primary',
         customVariables:dict={},
-		shadowWidth:int=30,
-		xIndex:float=0.0,
-		yIndex:float=0.0
+		shadowWidth:int=50,
+		xIndex:float=0,
+		yIndex:float=0
 		):
 		super(SideBar, self).__init__()
 
@@ -235,6 +235,44 @@ class SideBar(QtWidgets.QGroupBox):
 					'alignment': QtCore.Qt.AlignTop
 				},
 				'body': {
+					'children': [
+						Button(
+							text='Dashboard',
+							icon='fa.tachometer',
+							accent=self.accent,
+							size='lg',
+							customVariables={
+								'padding': '10px 10px',
+								'margin': '0px',
+								'min-width': '0px',
+								'text-align': 'left'
+							}
+						),
+						Button(
+							text='Profile',
+							icon='fa.user',
+							accent=self.accent,
+							size='lg',
+							customVariables={
+								'padding': '10px 10px',
+								'margin': '0px',
+								'min-width': '0px',
+								'text-align': 'left'
+							}
+						),
+						Button(
+							text='Settings',
+							icon='fa.cog',
+							accent=self.accent,
+							size='lg',
+							customVariables={
+								'padding': '10px 10px',
+								'margin': '0px',
+								'min-width': '0px',
+								'text-align': 'left'
+							}
+						),
+					],
 					'alignment': QtCore.Qt.AlignTop | QtCore.Qt.AlignLeft
 				},
 				'end': {
@@ -331,65 +369,10 @@ class SideBar(QtWidgets.QGroupBox):
 		)
 		
 	def createBody(self):
-		self.sideBodyLayout.addWidget(
-			Button(
-				text='Dashboard',
-				icon='fa.tachometer',
-				accent=self.accent,
-				size='lg',
-				customVariables={
-					'padding': '10px 10px',
-					'margin': '0px',
-					'min-width': '0px',
-					'text-align': 'left'
-				}
+		for child in self.child['body']['children']:
+			self.sideBodyLayout.addWidget(
+				child
 			)
-		)
-
-		self.sideBodyLayout.addWidget(
-			Button(
-				text='Profile',
-				icon='fa.user',
-				accent=self.accent,
-				size='lg',
-				customVariables={
-					'padding': '10px 10px',
-					'margin': '0px',
-					'min-width': '0px',
-					'text-align': 'left'
-				}
-			)
-		)
-
-		self.sideBodyLayout.addWidget(
-			Button(
-				text='Settings',
-				icon='fa.cog',
-				accent=self.accent,
-				size='lg',
-				customVariables={
-					'padding': '10px 10px',
-					'margin': '0px',
-					'min-width': '0px',
-					'text-align': 'left'
-				}
-			)
-		)
-
-		self.sideBodyLayout.addWidget(
-			Button(
-				text='Exit',
-				icon='mdi.exit-to-app',
-				accent=self.accent,
-				size='lg',
-				customVariables={
-					'padding': '10px 10px',
-					'margin': '0px',
-					'min-width': '0px',
-					'text-align': 'left'
-				}
-			)
-		)
 
 	def createEnd(self):
 		self.sideEndLayout.addWidget(
@@ -470,12 +453,9 @@ class Page(QtWidgets.QWidget):
 					'alignment': QtCore.Qt.AlignCenter
 				},
 				'body': {
-					'child': Container(
+					'children': Container(
 						child={
-							'child': Button(
-								text='Dashboard',
-								icon='fa.tachometer'
-							)
+							'child': QtWidgets.QVBoxLayout()
 						}
 					),
 					'alignment': QtCore.Qt.AlignBottom
@@ -549,9 +529,10 @@ class Page(QtWidgets.QWidget):
 		)
 
 	def createBody(self):
-		self.rightPageLayout.addWidget(
-			self.child['body']['child']
-		)
+		for child in self.child['body']['children']:
+			self.rightPageLayout.addWidget(
+				child
+			)
 
 	def createFooter(self):
 		pass
