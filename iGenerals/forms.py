@@ -168,6 +168,7 @@ class Form(QtWidgets.QGroupBox):
 		grid:bool=False,
 		width:int=400,
 		height:int=600,
+		accent:str=None,
 		children:dict={},
 		customVariables:dict={},
 		onSubmit=None
@@ -175,11 +176,14 @@ class Form(QtWidgets.QGroupBox):
 		super(Form, self).__init__()
 
 		self.grid = grid
+		self.accent = accent
+		self.accentStyles = genericVariables.variables['accents'][self.accent]
 		self.customVariables = iUtils.dictMerger(
 			{
 				'border-width': '0',
 				'padding': '20px'
 			},
+			self.accentStyles['normal'],
 		    customVariables
 		)
 		self.children = iUtils.dictMerger(

@@ -402,9 +402,7 @@ if __name__ == '__main__':
 
     windowLayout.addWidget(
         Form(
-            customVariables={
-                'background-color': 'rgba(0, 0, 0, 0.2)'
-            },
+            accent='secondary',
             height=900
         )
     )
