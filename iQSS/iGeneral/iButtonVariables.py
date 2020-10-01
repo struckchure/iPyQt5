@@ -7,8 +7,6 @@ variables = {
     'border-color': 'rgba(0, 0, 0, 0)',
     'border-radius': '0',
     'margin': '0',
-    'max-width': '200px',
-    'max-height': '50px',
     'min-width': '100px',
     'min-height': '30px',
     'font-family': 'Verdana',

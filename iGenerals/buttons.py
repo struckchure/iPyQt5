@@ -28,7 +28,8 @@ class Button(QtWidgets.QPushButton):
         onClick=None,
         accent:str=None,
         size:str='normal',
-        fill:bool=False,
+        xFill:bool=False,
+        yFill:bool=False,
         enabled:bool=True,
         customVariables:dict={},
         animation:dict={}
@@ -71,7 +72,8 @@ class Button(QtWidgets.QPushButton):
         )
         self.enabled = enabled
         self.onClick = onClick
-        self.fill = fill
+        self.xFill = xFill
+        self.yFill = yFill
         self.iconColor = iconColor
         if icon:
             self.icon = qta.icon(
@@ -100,17 +102,16 @@ class Button(QtWidgets.QPushButton):
 
         self.setText(text)
         
-        if not self.fill:
-            self.setMaximumSize(
-                width,
-                height
-            )
-            self.customVariables = iUtils.dictMerger(
-                customVariables,
-                genericVariables.variables['sizes'][size]
-            )
-        else:
-            self.customVariables = customVariables
+        self.customVariables = iUtils.dictMerger(
+            genericVariables.variables['sizes'][size],
+            customVariables,
+        )
+
+        if not self.xFill:
+            self.setMaximumWidth(width)
+
+        if not self.yFill:
+            self.setMaximumHeight(height)
 
         self.setSizePolicy(
             QtWidgets.QSizePolicy.Expanding,

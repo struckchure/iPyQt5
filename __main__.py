@@ -318,6 +318,33 @@ if __name__ == '__main__':
     x += 1
     y = 0
 
+    buttonLayout.addWidget(
+        Button(
+            f'Button',
+            size='lg',
+            customVariables={
+                'border-radius': '5px',
+            },
+            animation={
+                # Background Color
+
+                'bgStartValue': 'blue',
+                'bgEndValue': 'green',
+                'duration': 500,
+                
+                # Color
+                
+                'cStartValue': 'white',
+                'cEndValue': 'black',
+            },
+            xFill=True,
+            yFill=False
+        ),
+        x,
+        y,
+        1,
+        len(accents)
+    )
 
     windowLayout = QtWidgets.QVBoxLayout()
     windowLayout.addLayout(buttonLayout)
@@ -369,7 +396,7 @@ if __name__ == '__main__':
         }
     )
     window.show()
-    
+
     # window1 = Window()
     # window1.show()
     sys.exit(app.exec_())
