@@ -210,7 +210,7 @@ class SideBar(QtWidgets.QGroupBox):
         child:dict={},
         position:dict={},
         width:int=300,
-        collapseWidth:int=40,
+        collapseWidth:int=60,
         accent:str='primary',
         customVariables:dict={},
 		shadowWidth:int=50,

@@ -12,7 +12,6 @@ Label{
     min-width: 0;
     min-height: $min-height;
     background-color: $background-color;
-    background-clip: border-box;
     border-width: $border-width;
     border-style: $border-style;
     border-color: $border-color;
@@ -22,9 +21,10 @@ Label{
 }
 
 Label > QLabel {
-    color: white;
+    color: $color;
     text-align: $text-align;
-    margin: $margin
+    margin: $margin;
+    font-family: $font-family;
 }
 /* Label */
 ******************
