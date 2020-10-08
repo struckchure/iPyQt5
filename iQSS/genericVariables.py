@@ -25,6 +25,18 @@ colors = {
 
 variables = {
     'accents' : {
+        'transparent': {
+            'normal': {
+                'color': 'black',
+                'background-color': 'rgba(0, 0, 0, 0);',
+                'border-color': 'black',
+            },
+            'hover': {
+                'color': 'black',
+                'background-color': 'rgba(0, 0, 0, 0.1);',
+                'border-color': 'black',
+            }
+        },
         'primary': {
             'normal': {
                 'color': 'white',

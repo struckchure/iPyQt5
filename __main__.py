@@ -13,132 +13,19 @@ from iGenerals.labels import Label
 from iQSS import genericVariables
 
 
-class Window(QtWidgets.QWidget):
-    def __init__(self):
-        super(Window, self).__init__()
+def main():
+    app = QtWidgets.QApplication(sys.argv)
 
-        self.mainLayout = QtWidgets.QHBoxLayout()
-        self.mainLayout.setContentsMargins(0, 0, 0, 0)
+    buttonLayout = QtWidgets.QGridLayout()
 
-        self.accent = 'dark'
-        accents = genericVariables.variables['accents']
+    accents = genericVariables.variables['accents']
 
-        x, y = 0, 0
+    x, y = 0, 0
 
-        self.leftLayout = QtWidgets.QVBoxLayout()
-        self.mainLayout.addLayout(self.leftLayout)
-
-        self.rightLayout = QtWidgets.QVBoxLayout()
-        self.mainLayout.addLayout(self.rightLayout)
-
-        self.leftLayout.addWidget(
-            SideBar(
-                accent='dark',
-                customVariables={
-                    # 'max-width': '80px'
-                }
-            )
-        )
-
-        for accent in accents:
-            w, h = 100, 50
-            size = 'lg'
-            self.rightLayout.addWidget(
-                NavBar(
-                    accent=accent,
-                    child={
-                        'title': {
-                            'child': Label(
-                                text='NavBar',
-                                width=100,
-                                accent=accent
-                            ),
-                            'alignment': QtCore.Qt.AlignLeft | QtCore.Qt.AlignVCenter
-                        },
-                        'body': {
-                            'children': [
-                                Button(
-                                    'Home',
-                                    accent=accent,
-                                    size=size,
-                                    width=w,
-                                    height=h
-                                ),
-                                Button(
-                                    'Gallery',
-                                    accent=accent,
-                                    size=size,
-                                    width=w,
-                                    height=h
-                                ),
-                                Button(
-                                    'About',
-                                    accent=accent,
-                                    size=size,
-                                    width=w,
-                                    height=h
-                                ),
-                                Button(
-                                    'Account',
-                                    accent=accent,
-                                    size=size,
-                                    width=w,
-                                    height=h,
-                                    onClick=self.fade
-                                ),
-                            ],
-                            'alignment': QtCore.Qt.AlignRight
-                        },
-                        'end': {
-                            'children': [],
-                            'alignment': QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter
-                        },
-                    },
-                )
-            )
-
-        self.windowLayout = QtWidgets.QVBoxLayout()
-        self.windowLayout.setAlignment(QtCore.Qt.AlignCenter)
-
-        self.mainGroup = QtWidgets.QGroupBox()
-        self.mainGroup.setStyleSheet(
-            '''
-                QGroupBox {
-                    border: 0;
-                }
-            '''
-        )
-        self.mainGroup.setLayout(self.windowLayout)
-
-        self.mainScroll = QtWidgets.QScrollArea()
-        self.mainScroll.setStyleSheet(
-            '''
-                QScrollArea {
-                    border: 0;
-                }
-            '''
-        )
-        self.mainScroll.setWidget(self.mainGroup)
-        self.mainScroll.setWidgetResizable(True)
-
-        self.rightLayout.addWidget(self.mainScroll)
-
-        self.setLayout(self.mainLayout)
-
-        self.initialization()
-    
-    def initialization(self):
-        self.buttonLayout = QtWidgets.QGridLayout()
-        self.windowLayout.addLayout(self.buttonLayout)
-
-        accents = genericVariables.variables['accents']
-        sizes = genericVariables.variables['sizes']
-
-        x, y = 0, 0
-
-        for accent in accents:
-            size = 'xs'
-            self.buttonLayout.addWidget(
+    for accent in accents:
+        size = 'xss'
+        if accent != 'transparent':
+            buttonLayout.addWidget(
                 Button(
                     f'{accent} {size}',
                     accent=accent,
@@ -147,13 +34,14 @@ class Window(QtWidgets.QWidget):
                 x,
                 y
             )
-            y += 1
-        x += 1
-        y = 0
+        y += 1
+    x += 1
+    y = 0
 
-        for accent in accents:
-            size = 'sm'
-            self.buttonLayout.addWidget(
+    for accent in accents:
+        size = 'xs'
+        if accent != 'transparent':
+            buttonLayout.addWidget(
                 Button(
                     f'{accent} {size}',
                     accent=accent,
@@ -162,13 +50,14 @@ class Window(QtWidgets.QWidget):
                 x,
                 y
             )
-            y += 1
-        x += 1
-        y = 0
+        y += 1
+    x += 1
+    y = 0
 
-        for accent in accents:
-            size = 'lg'
-            self.buttonLayout.addWidget(
+    for accent in accents:
+        size = 'sm'
+        if accent != 'transparent':
+            buttonLayout.addWidget(
                 Button(
                     f'{accent} {size}',
                     accent=accent,
@@ -177,12 +66,29 @@ class Window(QtWidgets.QWidget):
                 x,
                 y
             )
-            y += 1
-        x += 1
-        y = 0
+        y += 1
+    x += 1
+    y = 0
 
-        for accent in accents:
-            self.buttonLayout.addWidget(
+    for accent in accents:
+        size = 'lg'
+        if accent != 'transparent':
+            buttonLayout.addWidget(
+                Button(
+                    f'{accent} {size}',
+                    accent=accent,
+                    size=size
+                ),
+                x,
+                y
+            )
+        y += 1
+    x += 1
+    y = 0
+
+    for accent in accents:
+        if accent != 'transparent':
+            buttonLayout.addWidget(
                 Card(
                     accent=accent,
                     width=200,
@@ -204,118 +110,6 @@ class Window(QtWidgets.QWidget):
                 x,
                 y
             )
-            y += 1
-        x += 1
-        y = 0
-    
-    def fade(self):
-        self.setWindowOpacity(0.5)
-        QtCore.QTimer.singleShot(1000, self.unfade)
-     
-    def unfade(self):
-        self.setWindowOpacity(1)
-
-    def resizeEvent(self, event):
-        self.resizeFunction()
-        super(Window, self).resizeEvent(event)
-
-    def resizeFunction(self):
-        print(self.width(), self.height())
-
-
-if __name__ == '__main__':
-    app = QtWidgets.QApplication(sys.argv)
-
-    buttonLayout = QtWidgets.QGridLayout()
-
-    accents = genericVariables.variables['accents']
-    sizes = genericVariables.variables['sizes']
-
-    x, y = 0, 0
-
-    for accent in accents:
-        size = 'xss'
-        buttonLayout.addWidget(
-            Button(
-                f'{accent} {size}',
-                accent=accent,
-                size=size
-            ),
-            x,
-            y
-        )
-        y += 1
-    x += 1
-    y = 0
-
-    for accent in accents:
-        size = 'xs'
-        buttonLayout.addWidget(
-            Button(
-                f'{accent} {size}',
-                accent=accent,
-                size=size
-            ),
-            x,
-            y
-        )
-        y += 1
-    x += 1
-    y = 0
-
-    for accent in accents:
-        size = 'sm'
-        buttonLayout.addWidget(
-            Button(
-                f'{accent} {size}',
-                accent=accent,
-                size=size
-            ),
-            x,
-            y
-        )
-        y += 1
-    x += 1
-    y = 0
-
-    for accent in accents:
-        size = 'lg'
-        buttonLayout.addWidget(
-            Button(
-                f'{accent} {size}',
-                accent=accent,
-                size=size
-            ),
-            x,
-            y
-        )
-        y += 1
-    x += 1
-    y = 0
-
-    for accent in accents:
-        buttonLayout.addWidget(
-            Card(
-                accent=accent,
-                width=200,
-                header={
-                    'accent': accent
-                },
-                footer={
-                    'accent': accent
-                },
-                body={
-                    'alignment': QtCore.Qt.AlignCenter,
-                    'child': Button(
-                        'warning',
-                        accent='warning',
-                        size='lg'
-                    )
-                }
-            ),
-            x,
-            y
-        )
         y += 1
     x += 1
     y = 0
@@ -350,60 +144,12 @@ if __name__ == '__main__':
 
     windowLayout = QtWidgets.QVBoxLayout()
     windowLayout.addLayout(buttonLayout)
-    
-    windowLayout.addWidget(
-        TextInput(
-            child={
-                'icon': {
-                    'icon': 'fa.user',
-                    'color': 'black',
-                    'scale': 0.9
-                },
-                'label': {
-                    'text': 'Username',
-                    'font-size': '12px'
-                },
-                'direction': QtWidgets.QBoxLayout.TopToBottom
-            },
-            width=300,
-            placeHolderText='John',
-            customVariables={
-                'font-size': '12px',
-                'border-color': 'grey',
-                'border-radius': '6px',
-            },
-        )
-    )
-
-    windowLayout.addWidget(
-        TextInput(
-            child={
-                'icon': {
-                    'icon': 'fa.key',
-                    'color': 'black',
-                    'scale': 0.9
-                },
-                'label': {
-                    'text': 'Password',
-                    'font-size': '12px'
-                },
-                'direction': QtWidgets.QBoxLayout.TopToBottom
-            },
-            password=True,
-            width=300,
-            placeHolderText='keep it secret',
-            customVariables={
-                'font-size': '12px',
-                'border-color': 'grey',
-                'border-radius': '6px',
-            },
-        )
-    )
 
     windowLayout.addWidget(
         Form(
-            accent='secondary',
-            height=900
+            grid=True,
+            height=900,
+            width=1500,
         )
     )
     
@@ -429,13 +175,6 @@ if __name__ == '__main__':
     )
     mainScroll.setWidget(mainGroup)
     mainScroll.setWidgetResizable(True)
-
-    test = QtWidgets.QLabel('text')
-    testIcon = qta.IconWidget(
-        'fa5s.music',
-        color='blue',
-        color_active='orange'
-    )
 
     window = Page(
         child={
@@ -464,3 +203,7 @@ if __name__ == '__main__':
     window.show()
 
     sys.exit(app.exec_())
+
+
+if __name__ == '__main__':
+    main()
