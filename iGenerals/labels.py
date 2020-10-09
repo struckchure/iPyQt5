@@ -18,12 +18,15 @@ class Label(QtWidgets.QGroupBox):
 	def __init__(
 			self,
             text:str='Label',
-            width=50,
-            height=45,
+            width=None,
+            height=None,
             child:dict={},
             position:dict={},
             accent:str='primary',
-            customVariables:dict={}
+            customVariables:dict={},
+            size:str='lg',
+            xFill:bool=False,
+            yFill:bool=False
 		):
 		super(Label, self).__init__()
 
@@ -37,6 +40,20 @@ class Label(QtWidgets.QGroupBox):
 			self.accentStyles['normal'],
 			customVariables
 		)
+		self.xFill = xFill
+		self.yFill = yFill
+		self.size = size
+
+		if not width:
+			width = genericVariables.sizes[size]['width']
+		if not height:
+			height = genericVariables.sizes[size]['height']
+
+		if not self.xFill:
+			self.setMaximumWidth(width)
+
+		if not self.yFill:
+			self.setMaximumHeight(height)
 		
 		self.navBarLayout = QtWidgets.QHBoxLayout()
 

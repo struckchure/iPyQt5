@@ -17,7 +17,7 @@ Label{
     border-color: $border-color;
     border-radius: $border-radius;
 	padding: $padding;
-    margin: 0
+    margin: 0;
 }
 
 Label > QLabel {

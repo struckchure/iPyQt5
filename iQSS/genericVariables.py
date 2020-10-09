@@ -148,3 +148,26 @@ variables = {
         },
     }
 }
+
+sizes = {
+    'normal': {
+        'width': 230,
+        'height': 50,
+    },
+    'lg': {
+        'width': 200,
+        'height': 50
+    },
+    'sm' : {
+        'width': 170,
+        'height': 40
+    },
+    'xs' : {
+        'width': 150,
+        'height': 30
+    },
+    'xss' : {
+        'width': 120,
+        'height': 30
+    }
+}

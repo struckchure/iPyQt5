@@ -6,6 +6,7 @@ import qtawesome as qta
 
 from iGenerals.buttons import Button
 from iGenerals.cards import Card
+from iGenerals.alerts import Alert
 from iLayouts.layouts import NavBar, SideBar, Page
 from iGenerals.forms import TextInput, Form
 from iLayouts.containers import Container, Scroll
@@ -106,6 +107,24 @@ def main():
                             size='lg'
                         )
                     }
+                ),
+                x,
+                y
+            )
+        y += 1
+    x += 1
+    y = 0
+
+    for accent in accents:
+        size = 'xss'
+        if accent != 'transparent':
+            buttonLayout.addWidget(
+                Alert(
+                    accent=accent,
+                    text=accent,
+                    size=size,
+                    xFill=True,
+                    yFill=True
                 ),
                 x,
                 y

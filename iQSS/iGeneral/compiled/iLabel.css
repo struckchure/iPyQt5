@@ -9,7 +9,7 @@ Label{
     border-color: rgba(0, 0, 0, 0.125);
     border-radius: 0.25rem;
 	padding: 0.5rem 0.5rem;
-    margin: 0
+    margin: 0;
 }
 
 Label > QLabel {

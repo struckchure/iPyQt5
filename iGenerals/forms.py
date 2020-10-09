@@ -7,6 +7,7 @@ import os
 
 from iUtils import iUtils
 from iQSS.iGeneral import iFormVariables
+from iGenerals.alerts import Alert
 from iGenerals.buttons import Button
 from iGenerals.labels import Label
 from iQSS import genericVariables
@@ -521,8 +522,8 @@ class Form(QtWidgets.QGroupBox):
 					    customVariables={
 					        'font-size': '12px',
 					        'border-color': 'grey',
-					        # 'border-radius': '6px',
 					    },
+					    required=True
 					),
 					ImageInput(
 						child={
@@ -537,7 +538,6 @@ class Form(QtWidgets.QGroupBox):
 					    customVariables={
 					        'font-size': '12px',
 					        'border-color': 'grey',
-					        # 'border-radius': '6px',
 					    },
 					),
 					FileInput(
@@ -553,7 +553,6 @@ class Form(QtWidgets.QGroupBox):
 					    customVariables={
 					        'font-size': '12px',
 					        'border-color': 'grey',
-					        # 'border-radius': '6px',
 					    },
 					),
 				],
@@ -569,12 +568,52 @@ class Form(QtWidgets.QGroupBox):
 					onClick=self.onSubmit,
 					size='lg',
 					width=300
-					# xFill=True
 				),
+				'errorMessages':{
+					'fieldErrors': [
+						Alert(
+							accent='danger',
+							text='Username field is required',
+		                    width=900,
+		                    height=900,
+						),
+						Alert(
+							accent='danger',
+							text='Password field is required',
+							width=900,
+		                    height=900,
+						),
+						Alert(
+							accent='danger',
+							text='Image field is required',
+							width=900,
+		                    height=900,
+						),
+						Alert(
+							accent='danger',
+							text='Image field is required',
+							width=900,
+		                    height=900,
+						),
+					],
+					'validationError': [],
+				},
 				'spacing': 5,
 				'alignment': QtCore.Qt.AlignCenter
 			},
 			children
+		)
+
+		self.mainFormLayout = QtWidgets.QVBoxLayout()
+		self.mainFormLayout.setContentsMargins(0, 0, 0, 0)
+		self.mainFormLayout.setSpacing(5)
+		self.mainFormLayout.setAlignment(QtCore.Qt.AlignCenter)
+
+		self.setLayout(self.mainFormLayout)
+		self.setMaximumSize(width, height)
+		self.setSizePolicy(
+			QtWidgets.QSizePolicy.Expanding,
+			QtWidgets.QSizePolicy.Expanding
 		)
 
 		if grid:
@@ -586,12 +625,7 @@ class Form(QtWidgets.QGroupBox):
 		self.formLayout.setSpacing(self.children['spacing'])
 		self.formLayout.setAlignment(self.children['alignment'])
 
-		self.setLayout(self.formLayout)
-		self.setMaximumSize(width, height)
-		self.setSizePolicy(
-			QtWidgets.QSizePolicy.Expanding,
-			QtWidgets.QSizePolicy.Expanding
-		)
+		self.mainFormLayout.addLayout(self.formLayout)
 
 		self.initialization()
 
@@ -651,11 +685,19 @@ class Form(QtWidgets.QGroupBox):
 		for child in self.children['children']:
 			if child.required:
 				if not child.text():
-					message = 'field is required'
+					error = self.children['errorMessages']['fieldErrors'][self.children['children'].index(child)]
+					error.resetSize()
+
+					self.mainFormLayout.insertWidget(
+						0,
+						error,
+						stretch=0,
+						alignment=QtCore.Qt.AlignCenter
+					)
 
 					fieldValues = None
 
-					return fieldValues
+					break
 			else:
 				fieldValues.append(child.text())
 
