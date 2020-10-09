@@ -684,8 +684,8 @@ class Form(QtWidgets.QGroupBox):
 
 		for child in self.children['children']:
 			if child.required:
+				error = self.children['errorMessages']['fieldErrors'][self.children['children'].index(child)]
 				if not child.text():
-					error = self.children['errorMessages']['fieldErrors'][self.children['children'].index(child)]
 					error.resetSize()
 
 					self.mainFormLayout.insertWidget(
@@ -698,6 +698,9 @@ class Form(QtWidgets.QGroupBox):
 					fieldValues = None
 
 					break
+				else:
+					if error.height() > 0:
+						error.dismiss()
 			else:
 				fieldValues.append(child.text())
 
