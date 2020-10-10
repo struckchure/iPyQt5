@@ -9,7 +9,7 @@ from iGenerals.cards import Card
 from iGenerals.alerts import Alert
 from iLayouts.layouts import NavBar, SideBar, Page
 from iGenerals.forms import TextInput, Form
-from iLayouts.containers import Container, Scroll
+from iLayouts.containers import Container, Scroll, Row, Column, Table
 from iGenerals.labels import Label
 from iQSS import genericVariables
 
@@ -170,6 +170,74 @@ def main():
             height=900,
             width=1500,
         )
+    )
+
+    windowLayout.addWidget(
+        Row(
+            xFill=True,
+            yFill=False,
+            children={
+                'children': [
+                    Button(
+                        text='Row',
+                        accent='primary'
+                    ),
+                    Button(
+                        text='Row',
+                        accent='primary'
+                    ),
+                    Button(
+                        text='Row',
+                        accent='primary'
+                    ),
+                    Button(
+                        text='Row',
+                        accent='primary'
+                    ),
+                    Button(
+                        text='Row',
+                        accent='primary'
+                    )
+                ],
+                'alignment': QtCore.Qt.AlignLeft | QtCore.Qt.AlignHCenter
+            }
+        )
+    )
+
+    windowLayout.addWidget(
+        Column(
+            xFill=False,
+            yFill=True,
+            children={
+                'children': [
+                    Button(
+                        text='Row',
+                        accent='primary'
+                    ),
+                    Button(
+                        text='Row',
+                        accent='primary'
+                    ),
+                    Button(
+                        text='Row',
+                        accent='primary'
+                    ),
+                    Button(
+                        text='Row',
+                        accent='primary'
+                    ),
+                    Button(
+                        text='Row',
+                        accent='primary'
+                    )
+                ],
+                'alignment': QtCore.Qt.AlignLeft | QtCore.Qt.AlignHCenter
+            }
+        )
+    )
+
+    windowLayout.addWidget(
+        Table()
     )
     
     mainGroup = QtWidgets.QGroupBox()

@@ -56,3 +56,57 @@ Page{
 }
 
 /* Page */
+******************
+/* Row */
+
+Row{
+    min-width: 0px;
+    min-height: 0px;
+    background-color: $background-color;
+    background-clip: border-box;
+    border-width: $border-width;
+    border-style: $border-style;
+    border-color: $border-color;
+    border-radius: $border-radius;
+    padding: $padding;
+    margin: $margin;
+}
+
+/* Row */
+******************
+/* Column */
+
+Column{
+    min-width: 0px;
+    min-height: 0px;
+    background-color: $background-color;
+    color: $color;
+    background-clip: border-box;
+    border-width: $border-width;
+    border-style: $border-style;
+    border-color: $border-color;
+    border-radius: $border-radius;
+    padding: $padding;
+    margin: $margin;
+}
+
+/* Column */
+******************
+/* Table */
+
+Table{
+    min-width: 0px;
+    min-height: 0px;
+    background-color: $background-color;
+    color: $color;
+    background-clip: border-box;
+    border-width: $border-width;
+    border-style: $border-style;
+    border-color: $border-color;
+    border-radius: $border-radius;
+    padding: $padding;
+    margin: $margin;
+}
+
+/* Table */
+******************

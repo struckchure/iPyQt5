@@ -1,5 +1,6 @@
 variables = {
     'background-color': '#ffffff',
+    'color': 'black',
     'border-width': '0',
     'border-style': 'solid',
     'border-color': 'rgba(0, 0, 0, 0.125)',
