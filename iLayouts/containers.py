@@ -169,8 +169,8 @@ class Row(QtWidgets.QGroupBox):
 		self.children = iUtils.dictMerger(
 			{
 				'children': [],
-				'spacing': 5,
-				'alignment': QtCore.Qt.AlignCenter
+				'spacing': 0,
+				'alignment': QtCore.Qt.AlignLeft
 			},
 			children
 		)
@@ -178,11 +178,10 @@ class Row(QtWidgets.QGroupBox):
 		self.yFill = yFill
 		self.size = size
 
-		# self.setMaximumWidth(1000)
-		# if not width:
-		# 	width = genericVariables.sizes[size]['width']
-		# if not height:
-		# 	height = genericVariables.sizes[size]['height']
+		if not width:
+			width = genericVariables.sizes[size]['width'] * 100
+		if not height:
+			height = genericVariables.sizes[size]['height']
 
 		if width:
 			self.setMaximumWidth(width)
@@ -190,7 +189,7 @@ class Row(QtWidgets.QGroupBox):
 		if height:
 			self.setMaximumHeight(height)
 
-		self.rowLayout = QtWidgets.QHBoxLayout()
+		self.rowLayout = QtWidgets.QGridLayout()
 		self.rowLayout.setContentsMargins(0, 0, 0, 0)
 		self.rowLayout.setSpacing(self.children['spacing'])
 		self.rowLayout.setAlignment(self.children['alignment'])
@@ -230,8 +229,16 @@ class Row(QtWidgets.QGroupBox):
 		self.setStyleSheet(self.customStyleSheet)
 
 	def createChildren(self, children):
+		x, y = 0, 0
 		for child in children['children']:
-			self.rowLayout.addWidget(child)
+			self.rowLayout.addWidget(
+				child,
+				x,
+				y,
+				# stretch=0,
+				alignment=children['alignment']
+			)
+			y += 1
 
 
 '''
@@ -262,8 +269,8 @@ class Column(QtWidgets.QGroupBox):
 		self.children = iUtils.dictMerger(
 			{
 				'children': [],
-				'spacing': 5,
-				'alignment': QtCore.Qt.AlignCenter
+				'spacing': 0,
+				'alignment': QtCore.Qt.AlignLeft
 			},
 			children
 		)
@@ -323,7 +330,10 @@ class Column(QtWidgets.QGroupBox):
 
 	def createChildren(self, children):
 		for child in children['children']:
-			self.columnLayout.addWidget(child)
+			self.addChild(child)
+
+	def addChild(self, child):
+		self.columnLayout.addWidget(child)
 
 
 '''
@@ -348,207 +358,160 @@ class Table(QtWidgets.QGroupBox):
 			self.accentStyles,
 			{
 				'padding': '0px',
-				'margin': '0px'
+				'margin': '0px',
 			},
 			customVariables,
 		)
 		self.child = iUtils.dictMerger(
 			{
 				'header': {
-					'child': Row(
-						xFill=True,
-						yFill=False,
-						children={
-							'children': [
-								Label(
-									text='S/N',
-									accent=self.accent,
-									xFill=True,
-									yFill=True,
-									width=60,
-									height=100,
-									customVariables={
-										'padding': '0px',
-										'min-height': '0px',
-										'min-width': '0px',
-										'background-color': 'rgba(0, 0, 0, 0)'
-									}
-								),
-								Label(
-									text='First name',
-									accent=self.accent,
-									xFill=True,
-									yFill=True,
-									customVariables={
-										'padding': '0px',
-										'min-height': '0px',
-										'background-color': 'rgba(0, 0, 0, 0)'
-									}
-								),
-								Label(
-									text='Last name',
-									accent=self.accent,
-									xFill=True,
-									yFill=True,
-									customVariables={
-										'padding': '0px',
-										'min-height': '0px',
-										'background-color': 'rgba(0, 0, 0, 0)'
-									}
-								),
-							],
-						},
-						customVariables={
-							'padding': '0px'
-						}
-					)
+					'children': [
+						Column(
+							xFill=False,
+							yFill=True,
+							width=60,
+							accent=self.accent,
+							children={
+								'children': [
+									Label(
+										text='S/N',
+										accent=self.accent,
+										xFill=False,
+										yFill=True,
+										width=60,
+										height=100,
+										customVariables={
+											'padding': '0px',
+											'min-height': '0px',
+											'min-width': '0px',
+											'background-color': 'rgba(0, 0, 0, 0)'
+										}
+									),
+								]
+							}
+						), # Serial Number
+						Column(
+							xFill=False,
+							yFill=True,
+							width=900,
+							accent=self.accent,
+							children={
+								'children': [
+									Label(
+										text='First name',
+										accent=self.accent,
+										xFill=True,
+										yFill=True,
+										customVariables={
+											'padding': '0px',
+											'min-height': '0px',
+											'background-color': 'rgba(0, 0, 0, 0)'
+										}
+									),
+								]
+							}
+						), # First name
+						Column(
+							width=900,
+							xFill=False,
+							yFill=True,
+							accent=self.accent,
+							children={
+								'children': [
+									Label(
+										text='Last name',
+										accent=self.accent,
+										xFill=True,
+										yFill=True,
+										customVariables={
+											'padding': '0px',
+											'min-height': '0px',
+											'background-color': 'rgba(0, 0, 0, 0)'
+										}
+									),
+								]
+							}
+						) # Last name
+					],
 				},
 				'body': {
 					'children': [
-						Row(
-							width=900,
-							xFill=True,
-							yFill=False,
-							children={
-								'children': [
-									Label(
-										text='1',
-										accent=self.accent,
-										xFill=True,
-										yFill=True,
-										width=100,
-										height=100,
-										customVariables={
-											'padding': '0px',
-											'min-height': '0px',
-											'min-width': '0px',
-											'background-color': 'rgba(0, 0, 0, 0)'
-										}
-									),
-									Label(
-										text='First name',
-										accent=self.accent,
-										xFill=True,
-										yFill=True,
-										customVariables={
-											'padding': '0px',
-											'min-height': '0px',
-											'background-color': 'rgba(0, 0, 0, 0)'
-										}
-									),
-									Label(
-										text='Last name',
-										accent=self.accent,
-										xFill=True,
-										yFill=True,
-										customVariables={
-											'padding': '0px',
-											'min-height': '0px',
-											'background-color': 'rgba(0, 0, 0, 0)'
-										}
-									),
-								],
-							},
-							customVariables={
-								'padding': '0px',
-							}
-						),
-						Row(
-							width=900,
-							xFill=False,
-							yFill=False,
-							children={
-								'children': [
-									Label(
-										text='2',
-										accent=self.accent,
-										xFill=True,
-										yFill=True,
-										width=100,
-										height=100,
-										customVariables={
-											'padding': '0px',
-											'min-height': '0px',
-											'min-width': '0px',
-											'background-color': 'rgba(0, 0, 0, 0)'
-										}
-									),
-									Label(
-										text='First name',
-										accent=self.accent,
-										xFill=True,
-										yFill=True,
-										customVariables={
-											'padding': '0px',
-											'min-height': '0px',
-											'background-color': 'rgba(0, 0, 0, 0)'
-										}
-									),
-									Label(
-										text='Last name',
-										accent=self.accent,
-										xFill=True,
-										yFill=True,
-										customVariables={
-											'padding': '0px',
-											'min-height': '0px',
-											'background-color': 'rgba(0, 0, 0, 0)'
-										}
-									),
-								],
-							},
-							customVariables={
-								'padding': '0px',
-							}
-						),
-						Row(
-							width=900,
-							xFill=False,
-							yFill=False,
-							children={
-								'children': [
-									Label(
-										text='3',
-										accent=self.accent,
-										xFill=True,
-										yFill=True,
-										width=100,
-										height=100,
-										customVariables={
-											'padding': '0px',
-											'min-height': '0px',
-											'min-width': '0px',
-											'background-color': 'rgba(0, 0, 0, 0)'
-										}
-									),
-									Label(
-										text='First name',
-										accent=self.accent,
-										xFill=True,
-										yFill=True,
-										customVariables={
-											'padding': '0px',
-											'min-height': '0px',
-											'background-color': 'rgba(0, 0, 0, 0)'
-										}
-									),
-									Label(
-										text='Last name',
-										accent=self.accent,
-										xFill=True,
-										yFill=True,
-										customVariables={
-											'padding': '0px',
-											'min-height': '0px',
-											'background-color': 'rgba(0, 0, 0, 0)'
-										}
-									),
-								],
-							},
-							customVariables={
-								'padding': '0px',
-							}
-						),
+						[
+							Label(
+								text='1',
+								accent=self.accent,
+								xFill=True,
+								yFill=True,
+								width=100,
+								height=100,
+								customVariables={
+									'padding': '0px',
+									'min-height': '0px',
+									'min-width': '0px',
+									'background-color': 'rgba(0, 0, 0, 0)'
+								}
+							),
+							Label(
+								text='John',
+								accent=self.accent,
+								xFill=True,
+								yFill=True,
+								customVariables={
+									'padding': '0px',
+									'min-height': '0px',
+									'background-color': 'rgba(0, 0, 0, 0)'
+								}
+							),
+							Label(
+								text='Doe',
+								accent=self.accent,
+								xFill=True,
+								yFill=True,
+								customVariables={
+									'padding': '0px',
+									'min-height': '0px',
+									'background-color': 'rgba(0, 0, 0, 0)'
+								}
+							),
+						],
+						[
+							Label(
+								text='3',
+								accent=self.accent,
+								xFill=True,
+								yFill=True,
+								width=100,
+								height=100,
+								customVariables={
+									'padding': '0px',
+									'min-height': '0px',
+									'min-width': '0px',
+									'background-color': 'rgba(0, 0, 0, 0)'
+								}
+							),
+							Label(
+								text='Mary',
+								accent=self.accent,
+								xFill=True,
+								yFill=True,
+								customVariables={
+									'padding': '0px',
+									'min-height': '0px',
+									'background-color': 'rgba(0, 0, 0, 0)'
+								}
+							),
+							Label(
+								text='Jane',
+								accent=self.accent,
+								xFill=True,
+								yFill=True,
+								customVariables={
+									'padding': '0px',
+									'min-height': '0px',
+									'background-color': 'rgba(0, 0, 0, 0)'
+								}
+							),
+						],
 					],
 					'alignment': QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop
 				},
@@ -560,7 +523,7 @@ class Table(QtWidgets.QGroupBox):
 		self.width = width
 		self.height = height
 
-		self.tableLayout = QtWidgets.QVBoxLayout()
+		self.tableLayout = QtWidgets.QGridLayout()
 		self.tableLayout.setContentsMargins(0, 0, 0, 0)
 		self.tableLayout.setSpacing(0)
 
@@ -607,35 +570,47 @@ class Table(QtWidgets.QGroupBox):
 		self.setStyleSheet(self.customStyleSheet)
 
 	def createHeader(self, child):
-		header = child['header']
+		header = child['header']['children']
 
-		self.tableLayout.addWidget(
-			header['child'],
-			stretch=0,
-			alignment=child['alignment']
-		)
+		self.addHeaderItems(header)
+
+	def addHeaderItems(self, items):
+		x, y = 0, 0
+		for item in items:
+			self.tableLayout.addWidget(item, x, y)
+			y += 1
 
 	def createBody(self, child):
 		body = child['body']
-		accent = 'transparent'
 
-		for child in body['children']:
-			index = body['children'].index(child)
+		stripe = 0
 
-			if index % 2 == 0:
-				customVariables = genericVariables.variables['accents'][accent]['hover']
+		for items in body['children']:
+			if stripe % 2 == 0:
+				self.addBodyItems(items, child, stripe=True)
 			else:
-				customVariables = genericVariables.variables['accents'][accent]['normal']
+				self.addBodyItems(items, child, stripe=False)
 
-			child.customVariables = customVariables
-			child.setCustomStyleSheet()
-			print(child)
+			stripe += 1
 
-			self.tableLayout.addWidget(
-				child,
-				stretch=0,
-				alignment=body['alignment']
-			)
+	def addBodyItems(self, items, child, stripe):
+		accent = self.accent
+		body = child['body']
+
+		for item in items:
+			index = items.index(item)
+			header = child['header']['children'][index]
+
+			if stripe:
+				customVariables = genericVariables.variables['accents'][accent]['hover']
+				item.customVariables = customVariables
+	
+			item.setCustomStyleSheet()
+
+			header.addChild(item)
 
 	def createFooter(self, child):
+		pass
+
+	def addFooterItems(self, items):
 		pass

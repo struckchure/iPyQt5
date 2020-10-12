@@ -211,23 +211,23 @@ def main():
             children={
                 'children': [
                     Button(
-                        text='Row',
+                        text='Column',
                         accent='primary'
                     ),
                     Button(
-                        text='Row',
+                        text='Column',
                         accent='primary'
                     ),
                     Button(
-                        text='Row',
+                        text='Column',
                         accent='primary'
                     ),
                     Button(
-                        text='Row',
+                        text='Column',
                         accent='primary'
                     ),
                     Button(
-                        text='Row',
+                        text='Column',
                         accent='primary'
                     )
                 ],
