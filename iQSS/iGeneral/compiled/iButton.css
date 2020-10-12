@@ -1,9 +1,9 @@
 
 
 Button{
-    background-color: #343a40;
+    background-color: #007bff;
     border: none;
-    color: #ffffff;
+    color: white;
     padding: 0.7rem 1.2rem;
     text-align: center;
     text-decoration: none;
@@ -18,12 +18,4 @@ Button{
     min-height: 30px;
     line-height: 1.5;
 }
-
-/* Button:pressed {
-    border: 2px solid grey;
-}
-
-Button:hover {
-    background-color: rgba(48, 128, 171, 0.845);
-} */
 

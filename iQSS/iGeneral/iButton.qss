@@ -27,12 +27,4 @@ Button{
     line-height: $line-height;
 }
 
-/* Button:pressed {
-    border: 2px solid grey;
-}
-
-Button:hover {
-    background-color: rgba(48, 128, 171, 0.845);
-} */
-
 /* Button Basic */
