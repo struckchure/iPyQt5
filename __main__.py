@@ -236,9 +236,13 @@ def main():
         )
     )
 
-    windowLayout.addWidget(
-        Table()
-    )
+    for accent in accents:
+        if accent != 'transparent':
+            windowLayout.addWidget(
+                Table(
+                    accent=accent
+                )
+            )
     
     mainGroup = QtWidgets.QGroupBox()
     mainGroup.setStyleSheet(
@@ -262,6 +266,19 @@ def main():
     )
     mainScroll.setWidget(mainGroup)
     mainScroll.setWidgetResizable(True)
+
+    tableLayout = QtWidgets.QVBoxLayout()
+    tableLayout.addWidget(
+        Table(
+            accent='transparent',
+            height=200,
+            customVariables={
+                'border-width': '1px',
+                'border-color': 'black',
+                'background-color': 'rgba(0, 0, 0, 0)',
+            }
+        )
+    )
 
     window = Page(
         child={

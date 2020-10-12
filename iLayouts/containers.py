@@ -270,7 +270,7 @@ class Column(QtWidgets.QGroupBox):
 			{
 				'children': [],
 				'spacing': 0,
-				'alignment': QtCore.Qt.AlignLeft
+				'alignment': QtCore.Qt.AlignLeft | QtCore.Qt.AlignTop
 			},
 			children
 		)
@@ -389,7 +389,7 @@ class Table(QtWidgets.QGroupBox):
 									),
 								]
 							}
-						), # Serial Number
+						), # Column
 						Column(
 							xFill=False,
 							yFill=True,
@@ -410,7 +410,7 @@ class Table(QtWidgets.QGroupBox):
 									),
 								]
 							}
-						), # First name
+						), # Column
 						Column(
 							width=900,
 							xFill=False,
@@ -431,85 +431,195 @@ class Table(QtWidgets.QGroupBox):
 									),
 								]
 							}
-						) # Last name
+						) # Column
 					],
 				},
 				'body': {
 					'children': [
 						[
-							Label(
-								text='1',
-								accent=self.accent,
+							Row(
 								xFill=True,
 								yFill=True,
-								width=100,
-								height=100,
-								customVariables={
-									'padding': '0px',
-									'min-height': '0px',
-									'min-width': '0px',
-									'background-color': 'rgba(0, 0, 0, 0)'
-								}
+								children = {
+									'children': [
+										Label(
+											text='1',
+											accent=self.accent,
+											xFill=True,
+											yFill=True,
+											customVariables={
+												'padding': '0px',
+												'min-height': '0px',
+												'min-width': '0px',
+												'background-color': 'rgba(0, 0, 0, 0)'
+											}
+										),
+									]
+								},
 							),
-							Label(
-								text='John',
-								accent=self.accent,
+							Row(
 								xFill=True,
 								yFill=True,
-								customVariables={
-									'padding': '0px',
-									'min-height': '0px',
-									'background-color': 'rgba(0, 0, 0, 0)'
-								}
+								children = {
+									'children': [
+										Label(
+											text='John',
+											accent=self.accent,
+											xFill=True,
+											yFill=True,
+											customVariables={
+												'padding': '0px',
+												'min-height': '0px',
+												'min-width': '0px',
+												'background-color': 'rgba(0, 0, 0, 0)'
+											}
+										),
+									]
+								},
 							),
-							Label(
-								text='Doe',
-								accent=self.accent,
+							Row(
 								xFill=True,
 								yFill=True,
-								customVariables={
-									'padding': '0px',
-									'min-height': '0px',
-									'background-color': 'rgba(0, 0, 0, 0)'
-								}
+								children = {
+									'children': [
+										Label(
+											text='Doe',
+											accent=self.accent,
+											xFill=True,
+											yFill=True,
+											customVariables={
+												'padding': '0px',
+												'min-height': '0px',
+												'min-width': '0px',
+												'background-color': 'rgba(0, 0, 0, 0)'
+											}
+										),
+									]
+								},
 							),
 						],
 						[
-							Label(
-								text='3',
-								accent=self.accent,
+							Row(
 								xFill=True,
 								yFill=True,
-								width=100,
-								height=100,
-								customVariables={
-									'padding': '0px',
-									'min-height': '0px',
-									'min-width': '0px',
-									'background-color': 'rgba(0, 0, 0, 0)'
-								}
+								children = {
+									'children': [
+										Label(
+											text='2',
+											accent=self.accent,
+											xFill=True,
+											yFill=True,
+											customVariables={
+												'padding': '0px',
+												'min-height': '0px',
+												'min-width': '0px',
+												'background-color': 'rgba(0, 0, 0, 0)'
+											}
+										),
+									]
+								},
 							),
-							Label(
-								text='Mary',
-								accent=self.accent,
+							Row(
 								xFill=True,
 								yFill=True,
-								customVariables={
-									'padding': '0px',
-									'min-height': '0px',
-									'background-color': 'rgba(0, 0, 0, 0)'
-								}
+								children = {
+									'children': [
+										Label(
+											text='John',
+											accent=self.accent,
+											xFill=True,
+											yFill=True,
+											customVariables={
+												'padding': '0px',
+												'min-height': '0px',
+												'min-width': '0px',
+												'background-color': 'rgba(0, 0, 0, 0)'
+											}
+										),
+									]
+								},
 							),
-							Label(
-								text='Jane',
-								accent=self.accent,
+							Row(
 								xFill=True,
 								yFill=True,
-								customVariables={
-									'padding': '0px',
-									'min-height': '0px',
-									'background-color': 'rgba(0, 0, 0, 0)'
-								}
+								children = {
+									'children': [
+										Label(
+											text='Doe',
+											accent=self.accent,
+											xFill=True,
+											yFill=True,
+											customVariables={
+												'padding': '0px',
+												'min-height': '0px',
+												'min-width': '0px',
+												'background-color': 'rgba(0, 0, 0, 0)'
+											}
+										),
+									]
+								},
+							),
+						],
+						[
+							Row(
+								xFill=True,
+								yFill=True,
+								children = {
+									'children': [
+										Label(
+											text='3',
+											accent=self.accent,
+											xFill=True,
+											yFill=True,
+											customVariables={
+												'padding': '0px',
+												'min-height': '0px',
+												'min-width': '0px',
+												'background-color': 'rgba(0, 0, 0, 0)'
+											}
+										),
+									]
+								},
+							),
+							Row(
+								xFill=True,
+								yFill=True,
+								children = {
+									'children': [
+										Label(
+											text='John',
+											accent=self.accent,
+											xFill=True,
+											yFill=True,
+											customVariables={
+												'padding': '0px',
+												'min-height': '0px',
+												'min-width': '0px',
+												'background-color': 'rgba(0, 0, 0, 0)'
+											}
+										),
+									]
+								},
+							),
+							Row(
+								xFill=True,
+								yFill=True,
+								children = {
+									'children': [
+										Label(
+											text='Doe',
+											accent=self.accent,
+											xFill=True,
+											yFill=True,
+											customVariables={
+												'padding': '0px',
+												'min-height': '0px',
+												'min-width': '0px',
+												'background-color': 'rgba(0, 0, 0, 0)'
+											}
+										),
+									]
+								},
 							),
 						],
 					],
@@ -531,7 +641,7 @@ class Table(QtWidgets.QGroupBox):
 			self.setMaximumWidth(self.width)
 
 		if self.height:
-			self.setMaximumWidth(self.height)
+			self.setMaximumHeight(self.height)
 
 		self.setLayout(self.tableLayout)
 		self.setSizePolicy(
@@ -603,8 +713,10 @@ class Table(QtWidgets.QGroupBox):
 
 			if stripe:
 				customVariables = genericVariables.variables['accents'][accent]['hover']
-				item.customVariables = customVariables
-	
+			else:
+				customVariables = genericVariables.variables['accents'][accent]['normal']
+
+			item.customVariables = customVariables
 			item.setCustomStyleSheet()
 
 			header.addChild(item)

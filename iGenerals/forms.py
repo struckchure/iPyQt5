@@ -311,7 +311,7 @@ class FileInput(QtWidgets.QGroupBox):
 		child:dict={},
 		customVariables:dict={},
 		placeHolderText:str=None,
-		extensions:list=['csv', 'mp4', 'mkv', 'mp3', 'png'],
+		extensions:list=['csv', 'mp4', 'mkv', 'mp3', 'png', 'css', 'qss'],
 		required=False
 		):
 		super(FileInput, self).__init__()
