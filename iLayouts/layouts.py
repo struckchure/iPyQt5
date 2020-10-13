@@ -356,19 +356,7 @@ class SideBar(QtWidgets.QGroupBox):
 	def createTitle(self):
 		self.sideTitleLayout.addWidget(
 			CardHeader(
-				accent='dark',
-				# child={
-				# 	'child': Button(
-				# 		text='|||',
-				# 		accent='primary',
-				# 		onClick=self.toggleMenu,
-				# 		size='xss',
-				# 		customVariables={
-				# 			'text-align': 'left',
-				# 			'padding': '10px'
-				# 		}
-				# 	)
-				# }
+				accent='dark'
 			)
 		)
 		
@@ -457,11 +445,13 @@ class Page(QtWidgets.QWidget):
 					'alignment': QtCore.Qt.AlignCenter
 				},
 				'body': {
-					'children': Container(
-						child={
-							'child': QtWidgets.QVBoxLayout()
-						}
-					),
+					'children': [
+						Container(
+							child={
+								'child': QtWidgets.QVBoxLayout()
+							}
+						),
+					],
 					'alignment': QtCore.Qt.AlignBottom
 				},
 				'footer': {

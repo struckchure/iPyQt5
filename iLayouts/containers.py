@@ -31,13 +31,18 @@ class Container(QtWidgets.QGroupBox):
 		)
 		self.child = iUtils.dictMerger(
 			{
-				'child': QtWidgets.QVBoxLayout()
+				'child': QtWidgets.QVBoxLayout(),
+				'alignment': QtCore.Qt.AlignTop | QtCore.Qt.AlignLeft,
+				'spacing': 0,
 			},
 			child
 		)
 
 		self.containerLayout = QtWidgets.QVBoxLayout()
+		self.containerLayout.setAlignment(self.child['alignment'])
+		self.containerLayout.setSpacing(self.child['spacing'])
 
+		self.setLayout(self.containerLayout)
 		self.setSizePolicy(
 			QtWidgets.QSizePolicy.Expanding,
 			QtWidgets.QSizePolicy.Expanding
@@ -72,8 +77,10 @@ class Container(QtWidgets.QGroupBox):
 		self.setStyleSheet(self.customStyleSheet)
 
 	def addChildWidget(self, child):
-		if child:
-			self.setLayout(child)
+		try:
+			self.containerLayout.addLayout(child)
+		except Exception as e:
+			self.containerLayout.addWidget(child)
 
 	def addLayout(self, child):
 		if child:

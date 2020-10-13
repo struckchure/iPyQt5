@@ -121,7 +121,7 @@ class Alert(QtWidgets.QGroupBox):
     def createDisissmable(self):
     	if self.dismissable:
     		self.dismissButton = Button(
-	    		icon='ei.remove',
+	    		icon='mdi.close',
 	    		iconScale=1.0,
 	    		iconSize=10,
 	    		text='',

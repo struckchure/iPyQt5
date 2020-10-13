@@ -16,20 +16,25 @@ import configurations
 
 class Card(QtWidgets.QGroupBox):
     def __init__(
-            self,
-            accent:str='primary',
-            width:int=200,
-            height:int=200,
-            header:dict={},
-            body:dict={},
-            footer:dict={},
-            customVariables:dict={},
+        self,
+        accent:str='primary',
+        width:int=200,
+        height:int=200,
+        header:dict={},
+        body:dict={},
+        footer:dict={},
+        customVariables:dict={},
+        xFill:bool=False,
+        yFill:bool=False
         ):
         super(Card, self).__init__()
 
         self.accent = accent
         self.height = height
         self.width = width
+        self.xFill = xFill
+        self.yFill = yFill
+        
         self.header = iUtils.dictMerger(
             {
                 'accent': accent,
@@ -62,11 +67,20 @@ class Card(QtWidgets.QGroupBox):
         self.cardLayout = QtWidgets.QVBoxLayout()
         self.cardLayout.setContentsMargins(0, 0, 0, 0)
 
+        if not self.width:
+            self.width = 900
+        if not self.height:
+            self.height = 400
+        
+        if self.xFill:
+            self.setMaximumWidth(self.width)
+        if self.yFill:
+            self.setMaximumHeight(self.height)
+
         self.setSizePolicy(
             QtWidgets.QSizePolicy.Expanding,
             QtWidgets.QSizePolicy.Expanding
         )
-        self.setMaximumSize(self.width, self.height)
         self.setLayout(self.cardLayout)
 
         self.initialization()
