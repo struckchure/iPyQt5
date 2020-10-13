@@ -84,6 +84,7 @@ class Container(QtWidgets.QGroupBox):
 	Scroll
 '''
 
+
 class Scroll(QtWidgets.QScrollArea):
 	def __init__(
 		self,
@@ -183,10 +184,10 @@ class Row(QtWidgets.QGroupBox):
 		if not height:
 			height = genericVariables.sizes[size]['height']
 
-		if width:
+		if not self.xFill:
 			self.setMaximumWidth(width)
 
-		if height:
+		if not self.yFill:
 			self.setMaximumHeight(height)
 
 		self.rowLayout = QtWidgets.QGridLayout()
@@ -235,7 +236,6 @@ class Row(QtWidgets.QGroupBox):
 				child,
 				x,
 				y,
-				# stretch=0,
 				alignment=children['alignment']
 			)
 			y += 1
@@ -349,6 +349,8 @@ class Table(QtWidgets.QGroupBox):
 		customVariables:dict={},
 		width:int=None,
 		height:int=None,
+		xFill:bool=False,
+		yFill:bool=False
 		):
 		super(Table, self).__init__()
 
@@ -373,20 +375,29 @@ class Table(QtWidgets.QGroupBox):
 							accent=self.accent,
 							children={
 								'children': [
-									Label(
-										text='S/N',
+									Row(
+										xFill=True,
+										yFill=False,
 										accent=self.accent,
-										xFill=False,
-										yFill=True,
-										width=60,
-										height=100,
-										customVariables={
-											'padding': '0px',
-											'min-height': '0px',
-											'min-width': '0px',
-											'background-color': 'rgba(0, 0, 0, 0)'
+										children = {
+											'children': [
+												Label(
+													text='S/N',
+													accent=self.accent,
+													xFill=False,
+													yFill=True,
+													width=60,
+													height=100,
+													customVariables={
+														'padding': '0px',
+														'min-height': '0px',
+														'min-width': '0px',
+														'background-color': 'rgba(0, 0, 0, 0)'
+													}
+												), # Label
+											]
 										}
-									),
+									), # Row
 								]
 							}
 						), # Column
@@ -397,41 +408,59 @@ class Table(QtWidgets.QGroupBox):
 							accent=self.accent,
 							children={
 								'children': [
-									Label(
-										text='First name',
-										accent=self.accent,
+									Row(
 										xFill=True,
-										yFill=True,
-										customVariables={
-											'padding': '0px',
-											'min-height': '0px',
-											'background-color': 'rgba(0, 0, 0, 0)'
+										yFill=False,
+										accent=self.accent,
+										children = {
+											'children': [
+												Label(
+													text='First name',
+													accent=self.accent,
+													xFill=True,
+													yFill=True,
+													customVariables={
+														'padding': '0px',
+														'min-height': '0px',
+														'background-color': 'rgba(0, 0, 0, 0)'
+													}
+												), # Label
+											]
 										}
-									),
+									), # Row
 								]
 							}
 						), # Column
 						Column(
-							width=900,
 							xFill=False,
 							yFill=True,
+							width=900,
 							accent=self.accent,
 							children={
 								'children': [
-									Label(
-										text='Last name',
-										accent=self.accent,
+									Row(
 										xFill=True,
-										yFill=True,
-										customVariables={
-											'padding': '0px',
-											'min-height': '0px',
-											'background-color': 'rgba(0, 0, 0, 0)'
+										yFill=False,
+										accent=self.accent,
+										children = {
+											'children': [
+												Label(
+													text='Last name',
+													accent=self.accent,
+													xFill=True,
+													yFill=True,
+													customVariables={
+														'padding': '0px',
+														'min-height': '0px',
+														'background-color': 'rgba(0, 0, 0, 0)'
+													}
+												), # Label
+											]
 										}
-									),
+									), # Row
 								]
 							}
-						) # Column
+						), # Column
 					],
 				},
 				'body': {
@@ -439,7 +468,7 @@ class Table(QtWidgets.QGroupBox):
 						[
 							Row(
 								xFill=True,
-								yFill=True,
+								yFill=False,
 								children = {
 									'children': [
 										Label(
@@ -459,7 +488,7 @@ class Table(QtWidgets.QGroupBox):
 							),
 							Row(
 								xFill=True,
-								yFill=True,
+								yFill=False,
 								children = {
 									'children': [
 										Label(
@@ -479,7 +508,7 @@ class Table(QtWidgets.QGroupBox):
 							),
 							Row(
 								xFill=True,
-								yFill=True,
+								yFill=False,
 								children = {
 									'children': [
 										Label(
@@ -501,7 +530,7 @@ class Table(QtWidgets.QGroupBox):
 						[
 							Row(
 								xFill=True,
-								yFill=True,
+								yFill=False,
 								children = {
 									'children': [
 										Label(
@@ -521,7 +550,7 @@ class Table(QtWidgets.QGroupBox):
 							),
 							Row(
 								xFill=True,
-								yFill=True,
+								yFill=False,
 								children = {
 									'children': [
 										Label(
@@ -541,7 +570,7 @@ class Table(QtWidgets.QGroupBox):
 							),
 							Row(
 								xFill=True,
-								yFill=True,
+								yFill=False,
 								children = {
 									'children': [
 										Label(
@@ -563,7 +592,7 @@ class Table(QtWidgets.QGroupBox):
 						[
 							Row(
 								xFill=True,
-								yFill=True,
+								yFill=False,
 								children = {
 									'children': [
 										Label(
@@ -583,7 +612,7 @@ class Table(QtWidgets.QGroupBox):
 							),
 							Row(
 								xFill=True,
-								yFill=True,
+								yFill=False,
 								children = {
 									'children': [
 										Label(
@@ -603,7 +632,7 @@ class Table(QtWidgets.QGroupBox):
 							),
 							Row(
 								xFill=True,
-								yFill=True,
+								yFill=False,
 								children = {
 									'children': [
 										Label(
@@ -632,15 +661,22 @@ class Table(QtWidgets.QGroupBox):
 		)
 		self.width = width
 		self.height = height
+		self.xFill = xFill
+		self.yFill = yFill
+
+		if not self.width:
+			self.width = 500
+		if not self.height:
+			self.height = 200
 
 		self.tableLayout = QtWidgets.QGridLayout()
 		self.tableLayout.setContentsMargins(0, 0, 0, 0)
 		self.tableLayout.setSpacing(0)
 
-		if self.width:
+		if not self.xFill:
 			self.setMaximumWidth(self.width)
 
-		if self.height:
+		if not self.yFill:
 			self.setMaximumHeight(self.height)
 
 		self.setLayout(self.tableLayout)

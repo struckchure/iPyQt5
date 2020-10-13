@@ -236,48 +236,27 @@ def main():
         )
     )
 
+    tableLayout = QtWidgets.QGridLayout()
+    tableLayout.setAlignment(QtCore.Qt.AlignHCenter | QtCore.Qt.AlignTop)
+
+    x, y = 0, 0
+
     for accent in accents:
-        if accent != 'transparent':
-            windowLayout.addWidget(
-                Table(
-                    accent=accent
-                )
-            )
-
-    windowLayout.addWidget(
-        Table(
-            accent='transparent',
-            height=200,
-            customVariables={
-                'border-width': '1px',
-                'border-color': 'black',
-                'background-color': 'rgba(0, 0, 0, 0)',
-            }
+        tableLayout.addWidget(
+            Table(
+                accent=accent
+            ),
+            x,
+            y
         )
-    )
-    
-    mainGroup = QtWidgets.QGroupBox()
-    mainGroup.setStyleSheet(
-        '''
-            QGroupBox {
-                border: 0;
-                background-color: rgba(0, 0, 0, 0)
-            }
-        '''
-    )
-    mainGroup.setLayout(windowLayout)
 
-    mainScroll = QtWidgets.QScrollArea()
-    mainScroll.setStyleSheet(
-        '''
-            QScrollArea {
-                border: 0;
-                background-color: rgba(0, 0, 0, 0)
-            }
-        '''
-    )
-    mainScroll.setWidget(mainGroup)
-    mainScroll.setWidgetResizable(True)
+        y += 1
+
+        if y >= 4:
+            y = 0
+            x += 1
+
+    windowLayout.addLayout(tableLayout)
 
     window = Page(
         child={

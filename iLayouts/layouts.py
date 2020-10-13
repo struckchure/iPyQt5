@@ -87,18 +87,22 @@ class NavBar(QtWidgets.QGroupBox):
 				},
 				'end': {
 					'children': [
-						Button(
-		                    'M',
+		                Button(
+		                    '',
+		                    icon='mdi.bell-outline',
+		                    iconColor='white',
 		                    accent=self.accent,
 		                    size=size,
-		                    width=20,
+		                    width=10,
 		                    height=h
 		                ),
-		                Button(
-		                    'S',
+						Button(
+		                    '',
+		                    icon='mdi.account-circle',
+		                    iconColor='white',
 		                    accent=self.accent,
 		                    size=size,
-		                    width=20,
+		                    width=10,
 		                    height=h
 		                ),
 					],
