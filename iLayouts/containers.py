@@ -21,7 +21,7 @@ class Container(QtWidgets.QGroupBox):
 		self,
         child:dict={},
         position:dict={},
-        customVariables:dict={}
+        customVariables:dict={},
 		):
 		super(Container, self).__init__()
 

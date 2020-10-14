@@ -418,10 +418,12 @@ class Page(QtWidgets.QWidget):
 	def __init__(
 		self,
 		child:dict={},
-		customVariables:dict={}
+		customVariables:dict={},
+		showOnStart:bool=True
 		):
 		super(Page, self).__init__()
 
+		self.showOnStart = showOnStart
 		self.customVariables = iUtils.dictMerger(
 			{
 				'margin': '0',
@@ -483,7 +485,8 @@ class Page(QtWidgets.QWidget):
 			QtWidgets.QSizePolicy.Expanding
 		)
 
-		self.initialization()
+		if self.showOnStart:
+			self.initialization()
 
 	def initialization(self):
 		self.setCustomStyleSheet()
