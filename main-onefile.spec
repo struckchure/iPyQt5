@@ -8,8 +8,8 @@ a = Analysis(['main.py'],
              binaries=[],
              datas=[],
              hiddenimports=[
-             	'PyQt5',
-             	'qtawesome',
+                'PyQt5',
+                'qtawesome',
              ],
              hookspath=[],
              runtime_hooks=[],
@@ -59,4 +59,3 @@ def extra_datas(mydir):
 
 # append the 'data' dir
 a.datas += extra_datas('iQSS')
-
