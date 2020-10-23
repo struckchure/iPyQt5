@@ -103,6 +103,7 @@ class Modal(QtWidgets.QWidget):
 		self.modalLayout.addWidget(
 			Button(
 				'',
+				accent='transparent',
 				icon='mdi.close',
 				iconColor='black',
 				iconScale=1.0,
@@ -110,6 +111,7 @@ class Modal(QtWidgets.QWidget):
 				size='xss',
 				width=30,
 	    		height=20,
+	    		onClick=self.moveModal
 			),
 			stretch=0,
 			alignment=QtCore.Qt.AlignRight | QtCore.Qt.AlignTop
@@ -119,62 +121,20 @@ class Modal(QtWidgets.QWidget):
 		self.modalLayout.addWidget(child['child'])
 
 	def moveModal(self, position):
+		endValue = self._animation.endValue()
+		startValue = self._animation.startValue()
+		currentPosition = self.x(), self.y() - 1
+
 		x = self.x()
+		print(f'x: {x} ; y: {self.y()}')
+		
+		if self.xPos == 0:
+			self.xPos = x * 0.85
+			
+			self.move(QtCore.QPoint(self.xPos, position))
+
+	def retractModal(self):
 		if self.xPos == 0:
 			self.xPos = x * 0.85
 
 		self.move(QtCore.QPoint(self.xPos, position))
-
-
-class PopUp(QtWidgets.QWidget):
-	def __init__(self, title='School Manager', body='Body', buttonText='&Ok, thanks', parent=None):
-		super(PopUp, self).__init__(parent=None)
-
-		self.title = title
-		self.body = body
-		self.buttonText = buttonText
-
-		self.windowLayout = QtWidgets.QVBoxLayout()
-
-		# qss = utils.readQSS()
-		# self.setStyleSheet(qss)
-		self.setWindowFlags(QtCore.Qt.FramelessWindowHint | QtCore.Qt.WindowStaysOnTopHint)
-		self.resize(300, 170)
-		self.setMaximumSize(600, 600)
-		self.setSizePolicy(
-			QtWidgets.QSizePolicy(
-				QtWidgets.QSizePolicy.MinimumExpanding,
-				QtWidgets.QSizePolicy.MinimumExpanding
-			)
-		)
-		resolution = QtWidgets.QDesktopWidget().availableGeometry().center()
-		qr = self.frameGeometry()
-		qr.moveCenter(resolution)
-		self.move(qr.topLeft())
-		self.setLayout(self.windowLayout)
-
-		self.initialization()
-
-	def initialization(self):
-		self.titleLabel = QtWidgets.QLabel(self.title)
-		self.titleLabel.setAlignment(QtCore.Qt.AlignCenter)
-		self.titleLabel.setObjectName('popUpTitle')
-		self.titleLabel.setFixedSize(200, 40)
-		self.windowLayout.addWidget(self.titleLabel, stretch=0, alignment=QtCore.Qt.AlignCenter)
-
-		self.bodyLabel = QtWidgets.QLabel(self.body)
-		self.bodyLabel.setObjectName('bodyLabel')
-		self.bodyLabel.setAlignment(QtCore.Qt.AlignCenter)
-		self.bodyLabel.setWordWrap(True)
-		self.bodyLabel.setMaximumSize(500, 500)
-		self.windowLayout.addWidget(self.bodyLabel, stretch=0, alignment=QtCore.Qt.AlignCenter)
-
-		self.spacerLabel = QtWidgets.QLabel()
-		self.spacerLabel.setFixedWidth(30)
-		self.windowLayout.addWidget(self.spacerLabel, stretch=0, alignment=QtCore.Qt.AlignCenter)
-
-		self.closeButton = QtWidgets.QPushButton(self.buttonText)
-		self.closeButton.setObjectName('login')
-		self.closeButton.setFixedSize(150, 30)
-		self.closeButton.clicked.connect(self.close)
-		self.windowLayout.addWidget(self.closeButton, stretch=0, alignment=QtCore.Qt.AlignHCenter | QtCore.Qt.AlignBottom)
