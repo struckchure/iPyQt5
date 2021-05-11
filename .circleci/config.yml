@@ -12,12 +12,20 @@ jobs:
       - run:
           name: Running Dummy tests
           command:
-            python test.py
-      - store_test_results:
-          path: test-reports
-      - store_artifacts:
-          path: test-reports
+            echo 'python test.py'
+  run_dummy:
+    docker:
+      - image: circleci/python:3.8.5
+    steps:
+      - checkout master
+      - run:
+        name: Dummy Job Running
+        command:
+          echo 'hello world'
 workflows:
   build_test:
     jobs:
       - run_test
+  build:
+    jobs:
+      - run_dummy
