@@ -21,7 +21,7 @@ jobs:
       - run:
         name: Dummy Job Running
         command:
-          echo 'hello world'
+          python test.py
 workflows:
   build_test:
     jobs:
