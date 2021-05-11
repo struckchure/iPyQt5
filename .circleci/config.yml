@@ -19,9 +19,9 @@ jobs:
     steps:
       - checkout
       - run:
-        name: Dummy Job Running
-        command:
-          python test.py
+          name: Dummy Job Running
+          command:
+            python test.py
 workflows:
   build_test:
     jobs:
