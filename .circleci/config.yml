@@ -26,6 +26,4 @@ workflows:
   build_test:
     jobs:
       - run_test
-  build:
-    jobs:
       - run_dummy
