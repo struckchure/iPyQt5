@@ -3,7 +3,6 @@ opencv-python==4.5.1.48
 pandas==1.2.2
 Pillow==8.2.0
 PyQt5==5.15.2
-PyQt5-sip==12.8.1
 QtAwesome==1.0.2
 qtconsole==5.0.2
 QtPy==1.9.0
