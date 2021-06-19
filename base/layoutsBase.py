@@ -22,7 +22,7 @@ class LayoutBase(QGroupBox):
         super(LayoutBase, self).__init__(*args, **kwargs)
 
         # set default vertical box layout for widget
-        # center alignment and 0 content margins LRTB
+        # center alignment and content margins of 0 to all sides
 
         self.__Layout = QVBoxLayout()
         self.__Layout.setContentsMargins(0, 0, 0, 0)
@@ -44,3 +44,19 @@ class LayoutBase(QGroupBox):
 
     def setStyleSheet(self, style):
         super(LayoutBase, self).setStyleSheet(style)
+
+    def setAlignment(self, *args, **kwargs):
+        self.__Layout.setAlignment(*args, **kwargs)
+
+    def setContentsMargins(self, *args, **kwargs):
+        self.__Layout.setContentsMargins(*args, **kwargs)
+
+    def setSpacing(self, *args, **kwargs):
+        self.__Layout.setSpacing(*args, **kwargs)
+
+    def getLayout(self, *args, **kwargs):
+        '''
+        returns QVBoxLayout() instance
+        usage: use this method modify layout behaviours
+        '''
+        return self.__Layout

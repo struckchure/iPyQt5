@@ -75,6 +75,9 @@ class Button(QPushButton):
     def setStyleSheet(self, style):
         super(Button, self).setStyleSheet(style)
 
+    def onClick(self, event):
+        self.clicked.connect(event)
+
 
 class TextInput(QLineEdit):
 
@@ -86,7 +89,7 @@ class TextInput(QLineEdit):
 
     MAX_HEIGHT = 60
 
-    WIDTH_RATIO = 3
+    WIDTH_RATIO = 1
     HEIGHT_RATIO = 1
 
     def __init__(self, *args, **kwargs):
@@ -95,7 +98,9 @@ class TextInput(QLineEdit):
         self.setDefaults()
 
     def setDefaults(self):
-        self.setFocus(Qt.NoFocusReason)
+        self.setDragEnabled(True)
+        self.setAcceptDrops(True)
+
         self.setMaximumHeight(self.MAX_HEIGHT)
         self.setSizePolicy(
             QSizePolicy.Expanding,
@@ -109,7 +114,14 @@ class TextInput(QLineEdit):
 
     def setMaximumHeight(self, height):
         height *= self.HEIGHT_RATIO
+
         super(TextInput, self).setMaximumHeight(height)
+
+    def setMaximumSize(self, width, height):
+        width *= self.WIDTH_RATIO
+        height *= self.HEIGHT_RATIO
+
+        super(TextInput, self).setMaximumSize(width, height)
 
     def setMinimumWidth(self, width):
         width *= self.WIDTH_RATIO
@@ -118,10 +130,20 @@ class TextInput(QLineEdit):
 
     def setMinimumHeight(self, height):
         height *= self.HEIGHT_RATIO
+
         super(TextInput, self).setMinimumHeight(height)
+
+    def setMinimumSize(self, width, height):
+        width *= self.WIDTH_RATIO
+        height *= self.HEIGHT_RATIO
+
+        super(TextInput, self).setMinimumSize(width, height)
 
     def setStyleSheet(self, style):
         super(TextInput, self).setStyleSheet(style)
+
+    def onTextChange(self, event):
+        self.textChanged.connect(event)
 
 
 class Label(QLabel):

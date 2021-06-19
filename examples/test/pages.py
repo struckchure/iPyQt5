@@ -1,4 +1,4 @@
-from PyQt5.QtWidgets import QLabel
+from PyQt5.QtCore import Qt
 from base.viewsBase import ViewBase as Page
 from base.widgetsBase import TextInput, Button, Label
 from css import engine as CSS
@@ -54,6 +54,7 @@ class Index(Page):
         self.password.setMaximumSize(FORM_WIDTH, 60)
         self.password.setStyleSheet(form)
         self.password.setEchoMode(TextInput.Password)
+        self.password.onTextChange(self.set_username)
 
         self.button = Button('Login')
         self.button.setStyleSheet(
@@ -67,11 +68,14 @@ class Index(Page):
             )
         )
         self.button.setMaximumSize(FORM_WIDTH, 60)
-        self.button.clicked.connect(self.routeToHome)
+        self.button.onClick(self.routeToHome)
 
         self.addWidget(self.username)
         self.addWidget(self.password)
         self.addWidget(self.button)
+
+    def set_username(self):
+        self.username.setText(self.password.text())
 
     def routeToHome(self):
         from routes import router
@@ -84,6 +88,7 @@ class Home(Page):
     def __init__(self, *args, **kwargs):
         super(Home, self).__init__(*args, **kwargs)
 
+        self.setAlignment(Qt.AlignTop | Qt.AlignLeft)
         self.setStyleSheet(
             CSS.getClasses(
                 objectName=self.OBJECT_TYPE,
@@ -133,7 +138,7 @@ class Home(Page):
 
         self.button2 = Button('Click')
         self.button2.setStyleSheet(form)
-        self.button2.clicked.connect(self.routeToIndex)
+        self.button2.onClick(self.routeToIndex)
 
         self.addWidget(self.button2)
 
