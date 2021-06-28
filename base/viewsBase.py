@@ -1,4 +1,4 @@
-from base.layoutsBase import LayoutBase
+from iPyQt5.base.layoutsBase import LayoutBase
 
 
 class ViewBase(LayoutBase):

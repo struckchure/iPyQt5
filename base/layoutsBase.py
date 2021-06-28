@@ -42,17 +42,11 @@ class LayoutBase(QGroupBox):
     def addWidget(self, *args, **kwargs):
         self.__Layout.addWidget(*args, **kwargs)
 
+    def addLayout(self, *args, **kwargs):
+        self.__Layout.addLayout(*args, **kwargs)
+
     def setStyleSheet(self, style):
         super(LayoutBase, self).setStyleSheet(style)
-
-    def setAlignment(self, *args, **kwargs):
-        self.__Layout.setAlignment(*args, **kwargs)
-
-    def setContentsMargins(self, *args, **kwargs):
-        self.__Layout.setContentsMargins(*args, **kwargs)
-
-    def setSpacing(self, *args, **kwargs):
-        self.__Layout.setSpacing(*args, **kwargs)
 
     def getLayout(self, *args, **kwargs):
         '''

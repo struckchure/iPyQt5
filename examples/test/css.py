@@ -1,6 +1,9 @@
-from styles.engine import StyleParser
+from iPyQt5.styles.engine import StyleParser
+from pathlib import Path
 
-styleSheet = './qt5-tailwind.css'
+CURRENT_DIR = Path(__file__).resolve().parent
+
+styleSheet = str(CURRENT_DIR.joinpath('qt5-tailwind.css'))
 engine = StyleParser(
     file=styleSheet
 )

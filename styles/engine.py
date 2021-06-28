@@ -1,4 +1,4 @@
-from app.utils import readToText
+from iPyQt5.app.utils import readToText
 
 
 class StyleParser:

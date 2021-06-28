@@ -78,6 +78,22 @@ class Button(QPushButton):
     def onClick(self, event):
         self.clicked.connect(event)
 
+    def onHover(self, event):
+        super().enterEvent(event)
+
+    def afterHover(self, event):
+        super().leaveEvent(event)
+
+    # def enterEvent(self, event):
+    #     if self.enabled:
+    #         self._animation.setDirection(QtCore.QAbstractAnimation.Backward)
+    #         self._animation.start()
+
+    # def leaveEvent(self, event):
+    #     if self.enabled:
+    #         self._animation.setDirection(QtCore.QAbstractAnimation.Forward)
+    #         self._animation.start()
+
 
 class TextInput(QLineEdit):
 

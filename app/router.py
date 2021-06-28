@@ -1,5 +1,5 @@
 from PyQt5.QtWidgets import QStackedWidget
-from base.layoutsBase import LayoutBase
+from iPyQt5.base.layoutsBase import LayoutBase
 
 
 class Router(LayoutBase):
