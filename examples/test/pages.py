@@ -123,7 +123,7 @@ class Thread(QThread):
 
         # cascade_file = str(CURRENT_DIR.joinpath('handa.xml')) # fingers up
         # cascade_file = str(CURRENT_DIR.joinpath('handb.xml')) # left to right
-        cascade_file = str(CURRENT_DIR.joinpath('hands.xml')) # left to right
+        cascade_file = str(CURRENT_DIR.joinpath('haarcascade_frontalface_default.xml')) # left to right
 
         hand_cascade = face = cv2.CascadeClassifier(cascade_file)
 
@@ -311,9 +311,11 @@ class Render3D(Page):
         self.rootEntity = QEntity()
         self.material = QPhongMaterial(self.rootEntity)
 
+        file_path = CURRENT_DIR.joinpath('monkey.obj')
+
         self.importMeshEntity = QEntity(self.rootEntity)
         self.importMesh = QMesh()
-        self.importMesh.setSource(QUrl(str(CURRENT_DIR.joinpath('monkey.obj'))))
+        self.importMesh.setSource(QUrl(str(file_path)))
 
         self.importMeshTransform = QTransform()
         self.importMeshTransform.setScale3D(QVector3D(5, 5, 5))
@@ -326,23 +328,23 @@ class Render3D(Page):
 
         self.importMeshEntity.addComponent(self.importMesh)
         self.importMeshEntity.addComponent(self.importMeshTransform)
-        # self.importMeshEntity.addComponent(self.material)
+        self.importMeshEntity.addComponent(self.material)
 
-        # self.torusEntity = QEntity(self.rootEntity)
-        # self.torusMesh = QTorusMesh()
-        # self.torusMesh.setRadius(5)
-        # self.torusMesh.setMinorRadius(3)
-        # self.torusMesh.setRings(100)
-        # self.torusMesh.setSlices(500)
+        self.torusEntity = QEntity(self.rootEntity)
+        self.torusMesh = QTorusMesh()
+        self.torusMesh.setRadius(5)
+        self.torusMesh.setMinorRadius(3)
+        self.torusMesh.setRings(100)
+        self.torusMesh.setSlices(500)
 
-        # self.torusTransform = QTransform()
-        # self.torusTransform.setScale3D(QVector3D(1.5, 1.5, 1.5))
-        # self.torusTransform.setRotation(
-        #     QQuaternion.fromAxisAndAngle(
-        #         QVector3D(1.0, 0.0, 0.0),
-        #         120.0
-        #     )
-        # )
+        self.torusTransform = QTransform()
+        self.torusTransform.setScale3D(QVector3D(1.5, 1.5, 1.5))
+        self.torusTransform.setRotation(
+            QQuaternion.fromAxisAndAngle(
+                QVector3D(1.0, 0.0, 0.0),
+                120.0
+            )
+        )
 
         # self.torusEntity.addComponent(self.torusMesh)
         # self.torusEntity.addComponent(self.torusTransform)
